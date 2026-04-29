@@ -105,6 +105,18 @@ input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.7) sepia(1) s
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes flipCard{0%{transform:rotateY(0)}50%{transform:rotateY(90deg)}100%{transform:rotateY(0)}}
+
+/* PHOTO UPLOAD */
+.photo-upload-area{border:2px dashed rgba(201,184,255,.3);border-radius:14px;padding:20px;text-align:center;cursor:pointer;background:rgba(10,0,21,.4);margin-top:6px}
+.photo-upload-area.has-photo{border-color:rgba(201,184,255,.5);border-style:solid}
+.photo-preview{width:100%;max-height:180px;object-fit:cover;border-radius:10px;display:none}
+.photo-upload-area.has-photo .photo-preview{display:block}
+.photo-upload-area.has-photo .photo-placeholder{display:none}
+.photo-placeholder-icon{font-size:32px;margin-bottom:6px}
+.photo-placeholder-text{font-size:13px;color:rgba(167,139,250,.6);line-height:1.6}
+.photo-btns{display:flex;gap:8px;margin-top:8px}
+.photo-btn{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(201,184,255,.2);background:rgba(124,58,237,.12);color:var(--t2);font-size:13px;font-family:'Noto Serif KR',serif;cursor:pointer}
+input[type=file]{display:none}
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--bg3)}
 ::-webkit-scrollbar-thumb{background:#6b3fa0;border-radius:2px}
@@ -120,10 +132,18 @@ input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.7) sepia(1) s
   <h1 class="title-main">신통한<br>운명풀이</h1>
   <p class="title-sub">사주 · 타로 · 손금 · 관상 · 궁합</p>
   <div class="orb">🔮</div>
-  <p class="tagline">만세력 자동계산 · 오행분석 · 대운세운<br>타로카드 · 궁합까지 한번에<br>무당보다 용하다는 말 들어보세요</p>
+  <p class="tagline">만세력 자동계산 · 오행분석 · 대운세운<br>손금·얼굴 사진으로 더 정확한 분석</p>
+  <div style="background:rgba(107,63,160,.15);border:1px solid rgba(201,184,255,.15);border-radius:14px;padding:14px 16px;margin-bottom:24px;text-align:left">
+    <div style="font-size:13px;color:var(--t2);line-height:2.1">
+      ✅ 30년 역술 데이터 기반 AI 분석<br>
+      ✅ 사주 · 타로 · 손금 · 관상 종합 판단<br>
+      ✅ 사진 업로드로 더 정확한 분석 가능<br>
+      ✅ 어려운 말 없이 쉽게 설명해드려요
+    </div>
+  </div>
   <button class="btn-main" onclick="go('menu')">운명을 열다 ✦</button>
-  <p style="font-size:11px;color:rgba(107,63,160,.7);margin-top:14px;text-align:center">오늘의 일진도 확인해보세요</p>
-  <div class="ilchin-box" style="margin-top:18px" id="ilchinBox"></div>
+  <div class="ilchin-box" id="ilchinBox" style="margin-top:16px"></div>
+  <p style="text-align:center;font-size:11px;color:rgba(167,139,250,.3);margin-top:14px">Made by 오영석</p>
 </div>
 
 <!-- MENU -->
@@ -772,32 +792,38 @@ async function submitForm() {
 // ══════════════════════════════════════
 // AI 호출
 // ══════════════════════════════════════
-async function callAI(userMsg, icon, title) {
+async function callAI(userMsg, icon, title, photoBase64) {
   go('loading');
   startLoadingAnim();
   const GROQ_KEY = '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';
   try {
+    let messages;
+    let model = 'llama-3.3-70b-versatile';
+    if (photoBase64) {
+      model = 'meta-llama/llama-4-scout-17b-16e-instruct';
+      messages = [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content: [
+          { type: 'text', text: userMsg + '\n\n[사진 분석 요청] 업로드된 사진을 보고 손금, 관상, 인상 등을 직접 분석해서 운세에 반영해 주세요. 사진에서 보이는 특징을 구체적으로 언급해 주세요.' },
+          { type: 'image_url', image_url: { url: `data:image/jpeg;base64,${photoBase64}` } }
+        ]}
+      ];
+    } else {
+      messages = [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content: userMsg }
+      ];
+    }
     const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${GROQ_KEY}`
-      },
-      body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
-          { role: 'user', content: userMsg }
-        ],
-        max_tokens: 1000,
-        temperature: 0.9
-      })
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_KEY}` },
+      body: JSON.stringify({ model, messages, max_tokens: 1200, temperature: 0.9 })
     });
     const data = await res.json();
-    const text = data?.choices?.[0]?.message?.content || '분석 결과를 가져오지 못했습니다. 다시 시도해주세요.';
+    const text = data?.choices?.[0]?.message?.content || '분석 결과를 가져오지 못했습니다. 다시 시도해 주세요.';
     showResult(text, icon, title);
   } catch(e) {
-    showResult('오류가 발생했습니다. 네트워크 확인 후 다시 시도해주세요.', icon, title);
+    showResult('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', icon, title);
   }
   stopLoadingAnim();
 }
@@ -850,6 +876,7 @@ function showResult(text, icon, title) {
 }
 
 function retry() {
+  uploadedPhotoBase64 = null;
   if (currentMenu?.id === 'taro') { openTarot(); }
   else { answers={}; openForm(currentMenu); }
 }
