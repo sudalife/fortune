@@ -775,14 +775,20 @@ async function submitForm() {
 async function callAI(userMsg, icon, title) {
   go('loading');
   startLoadingAnim();
+  const GEMINI_KEY = 'AIzaSyDtfRZKKY1SzvC6cFglPcgQD3F_3oNXB3Q';
+  const PROXY = 'https://corsproxy.io/?';
+  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
   try {
-    const res = await fetch('/.netlify/functions/fortune', {
+    const res = await fetch(PROXY + encodeURIComponent(API_URL), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: SYSTEM_PROMPT + '\n\n' + userMsg })
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: SYSTEM_PROMPT + '\n\n' + userMsg }] }],
+        generationConfig: { maxOutputTokens: 1000, temperature: 0.9 }
+      })
     });
     const data = await res.json();
-    const text = data?.result || '분석 결과를 가져오지 못했습니다. 다시 시도해주세요.';
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '분석 결과를 가져오지 못했습니다. 다시 시도해주세요.';
     showResult(text, icon, title);
   } catch(e) {
     showResult('오류가 발생했습니다. 네트워크 확인 후 다시 시도해주세요.', icon, title);
