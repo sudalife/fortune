@@ -436,7 +436,9 @@ const QUESTIONS = {
     {id:'gender', label:'성별',                 type:'sel', opts:['여성','남성']},
     {id:'hand',   label:'주로 쓰는 손',          type:'sel', opts:['오른손','왼손']},
     {id:'feature',label:'본인 인상의 특징',      type:'sel', opts:['눈이 크고 또렷','이마가 넓다','턱이 각지다','눈이 가늘다','코가 높다','전체적으로 둥근 인상','잘 모르겠다']},
-    {id:'concern',label:'가장 궁금한 것',        type:'sel', opts:['건강/수명','재물운','사랑/결혼','직업/리더십','전체']},
+    {id:'concern',label:'가장 궁금한 것',        type:'sel', opts:['건강과 수명 (생명선)','지혜와 직업 (두뇌선)','사랑과 인간관계 (감정선)','돈과 미래 (운명선)','전체 다 봐주세요']},
+    {id:'photo',  label:'손바닥 또는 얼굴 사진', type:'photo', desc:'사진을 올려주시면 훨씬 더 정확하게 분석합니다!
+손바닥이 잘 보이게 찍어주세요'},
     {id:'extra',  label:'하고 싶은 말 (선택)',   type:'txt', ph:'예: 건강이 걱정돼요'},
   ],
   total: [
@@ -447,6 +449,7 @@ const QUESTIONS = {
     {id:'concern',label:'지금 가장 큰 고민', type:'sel', opts:['돈/재물','건강','가족/자녀','남편/남자친구','직업/사업','인간관계','기타']},
     {id:'married',label:'결혼 여부',         type:'sel', opts:['기혼','미혼','이혼/별거','재혼']},
     {id:'job',    label:'현재 상황',         type:'sel', opts:['직장인','자영업/사업','전업주부','구직 중','기타']},
+    {id:'photo',  label:'사진 올리기 (선택)', type:'photo', desc:'본인 얼굴, 손바닥, 발바닥 사진을 올려주시면 관상과 손금까지 함께 분석해드려요!'},
     {id:'extra',  label:'하고 싶은 말 (선택)', type:'txt', ph:'예: 요즘 너무 지쳐있어요…'},
   ],
 };
@@ -489,6 +492,7 @@ let loadingTimer = null;
 let lastSaju = null;
 let lastDaeun = null;
 let lastDrawnCards = [];
+let uploadedPhotoBase64 = null;
 
 // ══════════════════════════════════════
 // STARS
@@ -595,6 +599,28 @@ function openForm(m) {
       inp.placeholder = q.ph||'';
     }
     inp.dataset.id = q.id;
+    if (q.type === 'photo') {
+      const desc = q.desc ? q.desc.replace(/\n/g, '<br>') : '사진을 올려주시면 더 정확하게 분석합니다';
+      wrap.innerHTML += `
+        <p style="font-size:12px;color:rgba(167,139,250,.5);margin-bottom:8px;line-height:1.6">${desc}</p>
+        <div class="photo-upload-area" id="photoArea_${q.id}">
+          <img class="photo-preview" id="photoPreview_${q.id}" src="" alt="">
+          <div class="photo-placeholder">
+            <div class="photo-placeholder-icon">📷</div>
+            <div class="photo-placeholder-text">사진을 눌러서 올려주세요<br><small style="opacity:.6">촬영 또는 갤러리에서 선택</small></div>
+          </div>
+        </div>
+        <div class="photo-btns">
+          <button class="photo-btn" onclick="triggerCamera('${q.id}')">📷 바로 촬영</button>
+          <button class="photo-btn" onclick="triggerGallery('${q.id}')">🖼️ 갤러리 선택</button>
+        </div>
+        <input type="file" id="photoInput_${q.id}_cam" accept="image/*" capture="environment" onchange="handlePhoto(event,'${q.id}')">
+        <input type="file" id="photoInput_${q.id}_gal" accept="image/*" onchange="handlePhoto(event,'${q.id}')">
+      `;
+      el.appendChild(wrap);
+      continue;
+    }
+
     // 생년월일 입력시 사주 미리보기
     if (q.id === 'birth' || q.id === 'btime' || q.id === 'gender') {
       inp.addEventListener('change', e => { answers[q.id]=e.target.value; updateSajuPreview(); });
@@ -742,12 +768,32 @@ async function submitTarot() {
 }
 
 // ══════════════════════════════════════
+// PHOTO
+// ══════════════════════════════════════
+function triggerCamera(id) { document.getElementById("photoInput_" + id + "_cam").click(); }
+function triggerGallery(id) { document.getElementById("photoInput_" + id + "_gal").click(); }
+function handlePhoto(event, id) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const base64 = e.target.result;
+    uploadedPhotoBase64 = base64.split(",")[1];
+    answers[id] = "사진업로드됨";
+    const area = document.getElementById("photoArea_" + id);
+    const preview = document.getElementById("photoPreview_" + id);
+    if (area && preview) { preview.src = base64; area.classList.add("has-photo"); }
+  };
+  reader.readAsDataURL(file);
+}
+
+// ══════════════════════════════════════
 // SUBMIT (사주/종합/궁합/손금)
 // ══════════════════════════════════════
 async function submitForm() {
   const qs = QUESTIONS[currentMenu.id];
   for (const q of qs) {
-    if (q.type !== 'txt' && !answers[q.id]) {
+    if (q.type !== 'txt' && q.type !== 'photo' && !answers[q.id]) {
       alert(`"${q.label}" 항목을 선택해주세요.`);
       return;
     }
