@@ -738,28 +738,16 @@ async function submitForm(){
 async function callAI(userMsg,icon,title,photo){
   show('loading');
   startLoad();
-  const GROQ='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';
+  const HF_TOKEN='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';
   try{
-    let messages, model='llama-3.3-70b-versatile';
-    if(photo){
-      model='meta-llama/llama-4-scout-17b-16e-instruct';
-      messages=[
-        {role:'system',content:SYSTEM},
-        {role:'user',content:[
-          {type:'text',text:userMsg},
-          {type:'image_url',image_url:{url:`data:image/jpeg;base64,${photo}`}}
-        ]}
-      ];
-    } else {
-      messages=[{role:'system',content:SYSTEM},{role:'user',content:userMsg}];
-    }
-    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+    const prompt=SYSTEM+'\n\n사용자: '+userMsg;
+    const res=await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1',{
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ},
-      body:JSON.stringify({model,messages,max_tokens:1200,temperature:0.9})
+      headers:{'Authorization':'Bearer '+HF_TOKEN,'Content-Type':'application/json'},
+      body:JSON.stringify({inputs:prompt,parameters:{max_length:1200,temperature:0.9}})
     });
     const data=await res.json();
-    const text=data?.choices?.[0]?.message?.content||'풀이 결과를 가져오지 못했습니다. 잠시 후 다시 시도해 주십시오.';
+    const text=data?.[0]?.generated_text?.split('사용자:')[1]?.trim()||'풀이 결과를 가져오지 못했습니다. 잠시 후 다시 시도해 주십시오.';
     showResult(text,icon,title);
   }catch(e){
     showResult('오류가 발생하였습니다. 잠시 후 다시 시도해 주십시오.',icon,title);
