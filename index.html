@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="신통한운세">
@@ -11,45 +11,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{
-  --bg:#0d0000;
-  --bg2:#1a0000;
-  --red:#8b1a1a;
-  --red2:#c0392b;
-  --gold:#c9a84c;
-  --gold2:#f0d060;
-  --t:#f5e6d0;
-  --t2:#e8c89a;
-  --t3:#c9a87a;
-  --dim:rgba(201,168,76,0.2);
-  --card:rgba(139,26,26,0.2)
-}
+:root{--bg:#0d0000;--bg2:#1a0000;--red:#8b1a1a;--red2:#c0392b;--gold:#c9a84c;--gold2:#f0d060;--t:#f5e6d0;--t2:#e8c89a;--t3:#c9a87a}
 html,body{height:100%;background:var(--bg);font-family:'Noto Serif KR',serif;color:var(--t);overflow-x:hidden}
 #app{min-height:100vh;min-height:100dvh;background:linear-gradient(170deg,#0d0000 0%,#1a0500 40%,#0d0000 100%);position:relative}
-
-/* 별 / 불꽃 파티클 */
 .stars{position:fixed;inset:0;pointer-events:none;z-index:0}
 .star{position:absolute;border-radius:50%;background:#c9a84c;animation:twinkle var(--dur) var(--del) infinite}
-
-/* 공통 레이아웃 */
 .screen{position:relative;z-index:1;padding:50px 22px 80px;max-width:420px;margin:0 auto;min-height:100vh;min-height:100dvh;display:none;flex-direction:column}
 .screen.on{display:flex}
-.back-btn{background:none;border:none;color:var(--gold);font-size:22px;cursor:pointer;padding:4px 0;margin-bottom:18px;display:block;font-family:'Noto Serif KR',serif}
-
-/* 버튼 */
-.btn-red{width:100%;padding:16px;border-radius:4px;border:1px solid var(--gold);background:linear-gradient(135deg,#6b0f0f,#8b1a1a);color:var(--gold2);font-size:17px;font-family:'Noto Serif KR',serif;font-weight:700;cursor:pointer;letter-spacing:3px;box-shadow:0 0 20px rgba(139,26,26,0.6),inset 0 1px 0 rgba(201,168,76,0.2);-webkit-appearance:none}
+.back-btn{background:none;border:none;color:var(--gold);font-size:22px;cursor:pointer;padding:4px 0;margin-bottom:18px;display:block}
+.btn-red{width:100%;padding:16px;border-radius:4px;border:1px solid var(--gold);background:linear-gradient(135deg,#6b0f0f,#8b1a1a);color:var(--gold2);font-size:17px;font-family:'Noto Serif KR',serif;font-weight:700;cursor:pointer;letter-spacing:3px;box-shadow:0 0 20px rgba(139,26,26,0.6);-webkit-appearance:none}
 .btn-red:active{transform:scale(.98)}
-.btn-ghost{width:100%;padding:14px;border-radius:4px;border:1px solid rgba(201,168,76,0.3);background:transparent;color:var(--t2);font-size:15px;font-family:'Noto Serif KR',serif;cursor:pointer;letter-spacing:1px}
-
-/* 홈 */
+.btn-ghost{width:100%;padding:14px;border-radius:4px;border:1px solid rgba(201,168,76,0.3);background:transparent;color:var(--t2);font-size:15px;font-family:'Noto Serif KR',serif;cursor:pointer}
 #home{align-items:center;justify-content:center;text-align:center}
-.candle-area{position:relative;margin:0 auto 20px;width:60px;height:80px}
+.candle{width:60px;height:80px;margin:0 auto 20px;position:relative}
 .candle-body{width:24px;height:50px;background:linear-gradient(180deg,#f5e6d0,#e8c89a);border-radius:2px;margin:0 auto;position:absolute;bottom:0;left:50%;transform:translateX(-50%)}
-.candle-flame{width:14px;height:20px;background:radial-gradient(ellipse at 50% 80%,#fff 0%,#ffd700 30%,#ff6600 70%,transparent 100%);border-radius:50% 50% 20% 20%;margin:0 auto;position:absolute;top:0;left:50%;transform:translateX(-50%);animation:flicker 1.5s ease-in-out infinite}
+.candle-flame{width:14px;height:20px;background:radial-gradient(ellipse at 50% 80%,#fff,#ffd700 30%,#ff6600);border-radius:50% 50% 20% 20%;position:absolute;top:0;left:50%;transform:translateX(-50%);animation:flicker 1.5s ease-in-out infinite}
 .candle-glow{width:40px;height:40px;background:radial-gradient(circle,rgba(255,200,0,0.3),transparent);border-radius:50%;position:absolute;top:-10px;left:50%;transform:translateX(-50%);animation:flicker 1.5s ease-in-out infinite}
-.home-title{font-size:32px;font-weight:700;color:var(--gold2);letter-spacing:4px;margin-bottom:6px;text-shadow:0 0 20px rgba(201,168,76,0.8)}
+.home-title{font-size:32px;font-weight:700;color:var(--gold2);letter-spacing:4px;margin-bottom:6px}
 .home-sub{font-size:12px;color:var(--t3);letter-spacing:3px;margin-bottom:20px}
-.home-divider{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 20px}
+.divider{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 20px}
 .home-tagline{font-size:14px;color:var(--t2);line-height:2;margin-bottom:8px}
 .trust-box{background:rgba(139,26,26,0.25);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:14px 16px;margin-bottom:24px;text-align:left}
 .trust-item{font-size:13px;color:var(--t2);line-height:2.1}
@@ -58,9 +38,7 @@ html,body{height:100%;background:var(--bg);font-family:'Noto Serif KR',serif;col
 .creator{text-align:center;margin-top:14px}
 .creator-name{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:2px}
 .creator-sub{font-size:11px;color:var(--t3);margin-top:2px}
-
-/* 메뉴 */
-.menu-title{font-size:22px;font-weight:700;color:var(--gold2);margin-bottom:6px;letter-spacing:2px}
+.menu-title{font-size:22px;font-weight:700;color:var(--gold2);margin-bottom:6px}
 .menu-sub{font-size:13px;color:var(--t3);margin-bottom:24px;line-height:1.8}
 .menu-list{display:flex;flex-direction:column;gap:12px}
 .menu-card{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,rgba(139,26,26,0.3),rgba(13,0,0,0.8));border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:16px 14px;cursor:pointer;transition:transform .15s;animation:fadeUp .4s ease both}
@@ -70,85 +48,40 @@ html,body{height:100%;background:var(--bg);font-family:'Noto Serif KR',serif;col
 .menu-label{font-size:17px;font-weight:700;color:var(--gold2);letter-spacing:1px}
 .menu-desc{font-size:12px;color:var(--t3);margin-top:3px;line-height:1.5}
 .menu-badge{margin-left:auto;flex-shrink:0;background:linear-gradient(135deg,#6b0f0f,#8b1a1a);color:var(--gold2);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px;border:1px solid rgba(201,168,76,0.3)}
-
-/* 질문 화면 */
 .q-header{text-align:center;margin-bottom:20px}
 .q-shaman{font-size:13px;color:var(--gold);letter-spacing:2px;margin-bottom:6px}
 .q-title{font-size:20px;font-weight:700;color:var(--gold2);letter-spacing:2px}
-.q-divider{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:10px auto}
 .q-list{display:flex;flex-direction:column;gap:18px;flex:1}
 .q-item{animation:fadeUp .4s ease both}
-.q-label{font-size:14px;color:var(--gold);font-weight:700;margin-bottom:4px;letter-spacing:1px;display:flex;align-items:center;gap:6px}
+.q-label{font-size:14px;color:var(--gold);font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:6px}
 .q-desc{font-size:12px;color:var(--t3);margin-bottom:6px;line-height:1.6}
 .req{font-size:10px;color:var(--red2);background:rgba(139,26,26,0.3);padding:2px 7px;border-radius:2px;border:1px solid rgba(192,57,43,0.3)}
-select,input[type=date],input[type=text]{width:100%;padding:13px 14px;border-radius:4px;border:1px solid rgba(201,168,76,0.25);background:rgba(13,0,0,0.7);color:var(--t);font-size:15px;font-family:'Noto Serif KR',serif;outline:none;-webkit-appearance:none;appearance:none}
+select,input[type=date],input[type=text],input[type=number]{width:100%;padding:13px 14px;border-radius:4px;border:1px solid rgba(201,168,76,0.25);background:rgba(13,0,0,0.7);color:var(--t);font-size:15px;font-family:'Noto Serif KR',serif;outline:none;-webkit-appearance:none;appearance:none}
 select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
-input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.6) sepia(1) saturate(3) hue-rotate(5deg)}
-.q-btn-wrap{margin-top:28px}
-
-/* 사주 미리보기 */
-.saju-preview{background:rgba(139,26,26,0.2);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:14px;margin-bottom:16px}
-.saju-preview-title{font-size:11px;color:var(--gold);letter-spacing:3px;margin-bottom:10px;text-align:center}
-.pillars{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
-.pillar{text-align:center;background:rgba(13,0,0,0.6);border:1px solid rgba(201,168,76,0.15);border-radius:4px;padding:8px 10px;min-width:52px}
-.pillar-name{font-size:10px;color:var(--t3);margin-bottom:3px}
-.pillar-gan{font-size:20px;font-weight:700}
-.pillar-ji{font-size:20px}
-.oh-row{display:flex;justify-content:center;gap:6px;margin-top:10px;flex-wrap:wrap}
-.oh-tag{font-size:12px;padding:3px 9px;border-radius:2px;font-weight:700}
-
-/* 사진 업로드 */
-.photo-area{border:2px dashed rgba(201,168,76,0.3);border-radius:4px;padding:20px;text-align:center;cursor:pointer;background:rgba(13,0,0,0.4);margin-top:6px}
-.photo-area.has-photo{border-color:rgba(201,168,76,0.6);border-style:solid}
-.photo-preview{width:100%;max-height:180px;object-fit:cover;border-radius:4px;display:none}
-.photo-area.has-photo .photo-preview{display:block}
-.photo-area.has-photo .photo-placeholder{display:none}
-.photo-placeholder-icon{font-size:30px;margin-bottom:6px}
-.photo-placeholder-text{font-size:13px;color:var(--t3);line-height:1.6}
-.photo-btns{display:flex;gap:8px;margin-top:8px}
-.photo-btn{flex:1;padding:10px;border-radius:4px;border:1px solid rgba(201,168,76,0.25);background:rgba(139,26,26,0.15);color:var(--t2);font-size:13px;font-family:'Noto Serif KR',serif;cursor:pointer}
-input[type=file]{display:none}
-
-/* 타로 */
-.tarot-hint{font-size:13px;color:var(--t2);text-align:center;line-height:1.8;margin:12px 0;padding:12px;background:rgba(139,26,26,0.2);border:1px solid rgba(201,168,76,0.15);border-radius:4px}
+.date-input-wrap{display:flex;gap:8px}
+.date-input-wrap input{flex:1;padding:13px 14px;border-radius:4px;border:1px solid rgba(201,168,76,0.25);background:rgba(13,0,0,0.7);color:var(--t);font-size:14px;font-family:'Noto Serif KR',serif}
+.tarot-hint{font-size:13px;color:var(--t2);text-align:center;line-height:1.8;margin:12px 0;padding:12px;background:rgba(139,26,26,0.2);border-radius:4px}
 .tarot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
-.tarot-card{aspect-ratio:2/3;border-radius:4px;border:1px solid rgba(201,168,76,0.25);background:linear-gradient(135deg,#1a0500,#0d0000);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s;position:relative;overflow:hidden}
+.tarot-card{aspect-ratio:2/3;border-radius:4px;border:1px solid rgba(201,168,76,0.25);background:linear-gradient(135deg,#1a0500,#0d0000);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s;position:relative}
 .tarot-card:active{transform:scale(.95)}
 .tarot-card.selected{border-color:var(--gold);box-shadow:0 0 15px rgba(201,168,76,0.4);background:linear-gradient(135deg,rgba(139,26,26,0.4),#0d0000)}
 .tarot-inner{display:flex;flex-direction:column;align-items:center;padding:8px;text-align:center;gap:4px}
-.tarot-back{font-size:24px;opacity:.3}
 .tarot-emoji{font-size:26px}
 .tarot-name{font-size:10px;color:var(--gold);font-weight:700}
-.tarot-meaning{font-size:9px;color:var(--t3);line-height:1.3}
-.tarot-pos{position:absolute;top:3px;left:0;right:0;text-align:center;font-size:9px;font-weight:700;color:var(--gold2);background:rgba(13,0,0,0.7);padding:2px 0}
-
-/* 로딩 */
+.tarot-pos{position:absolute;top:3px;font-size:9px;color:var(--gold2);background:rgba(13,0,0,0.7);padding:2px 0;width:100%;text-align:center}
 #loading{align-items:center;justify-content:center;text-align:center}
 .loading-candle{font-size:60px;margin-bottom:24px;animation:flicker 1.2s ease-in-out infinite}
 .loading-text{font-size:17px;color:var(--gold);letter-spacing:2px;animation:glow 1.5s ease-in-out infinite}
 .loading-sub{font-size:13px;color:var(--t3);margin-top:10px;line-height:1.8}
-
-/* 결과 */
 .result-header{text-align:center;margin-bottom:18px}
 .result-icon{font-size:36px;margin-bottom:6px}
 .result-title{font-size:19px;font-weight:700;color:var(--gold2);letter-spacing:2px}
-.result-divider{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:8px auto 0}
-.result-saju-box{background:rgba(139,26,26,0.2);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:12px;margin-bottom:14px}
-.result-saju-label{font-size:11px;color:var(--gold);letter-spacing:3px;margin-bottom:8px;text-align:center}
 .result-card{background:linear-gradient(135deg,rgba(139,26,26,0.15),rgba(13,0,0,0.8));border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:20px 16px;white-space:pre-wrap;line-height:2;font-size:15px;color:var(--t);margin-bottom:18px}
-.result-tarot-row{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
-.result-tarot-mini{text-align:center;background:rgba(139,26,26,0.15);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:8px 6px;flex:1}
-.result-tarot-emoji{font-size:20px;margin-bottom:2px}
-.result-tarot-pos{font-size:9px;color:var(--t3)}
-.result-tarot-name{font-size:11px;color:var(--gold);font-weight:700;margin-top:1px}
 .result-btns{display:flex;flex-direction:column;gap:10px}
 .disclaimer{text-align:center;font-size:11px;color:rgba(201,168,76,0.25);margin-top:18px;line-height:1.8}
-
-/* 애니메이션 */
 @keyframes twinkle{0%,100%{opacity:0}50%{opacity:1}}
 @keyframes flicker{0%,100%{transform:scale(1) rotate(-1deg);opacity:1}50%{transform:scale(1.05) rotate(1deg);opacity:.9}}
-@keyframes glow{0%,100%{text-shadow:0 0 8px rgba(201,168,76,.4)}50%{text-shadow:0 0 20px rgba(201,168,76,.9),0 0 40px rgba(201,168,76,.4)}}
-@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes glow{0%,100%{text-shadow:0 0 8px rgba(201,168,76,.4)}50%{text-shadow:0 0 20px rgba(201,168,76,.9)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:#0d0000}
@@ -161,14 +94,14 @@ input[type=file]{display:none}
 
 <!-- 홈 -->
 <div class="screen on" id="home">
-  <div class="candle-area">
+  <div class="candle">
     <div class="candle-glow"></div>
     <div class="candle-flame"></div>
     <div class="candle-body"></div>
   </div>
   <div class="home-title">신통한 운명풀이</div>
   <div class="home-sub">사주 · 타로 · 손금 · 관상 · 궁합</div>
-  <div class="home-divider"></div>
+  <div class="divider"></div>
   <p class="home-tagline">만세력 자동계산 · 오행분석 · 대운세운<br>손금·얼굴 사진 직접 분석</p>
   <div class="trust-box">
     <div class="trust-item">🕯️ 30년 역술 데이터 기반 인공지능 분석</div>
@@ -201,32 +134,12 @@ input[type=file]{display:none}
   <div class="q-header">
     <div class="q-shaman">🕯️ 신통한 운명풀이 🕯️</div>
     <div class="q-title" id="formTitle"></div>
-    <div class="q-divider"></div>
+    <div class="divider" style="margin:10px auto"></div>
   </div>
   <div id="sajuBox" style="display:none"></div>
   <div class="q-list" id="formFields"></div>
-  <div class="q-btn-wrap">
+  <div style="margin-top:28px">
     <button class="btn-red" onclick="submitForm()">점 보러 가기 ✦</button>
-  </div>
-</div>
-
-<!-- 타로 -->
-<div class="screen" id="tarotPick">
-  <button class="back-btn" onclick="show('menu')">← 뒤로</button>
-  <div class="q-header">
-    <div class="q-shaman">🕯️ 신통한 운명풀이 🕯️</div>
-    <div class="q-title">타로 카드</div>
-    <div class="q-divider"></div>
-  </div>
-  <div id="tarotFormFields"></div>
-  <div class="tarot-hint" id="tarotHint">
-    🕯️ 마음을 고요히 하시고<br>
-    눈을 감았다 뜬 후 이끌리는 카드를 고르세요<br>
-    <small style="opacity:.6">첫 번째 = 과거 · 두 번째 = 현재 · 세 번째 = 미래</small>
-  </div>
-  <div class="tarot-grid" id="tarotGrid"></div>
-  <div class="q-btn-wrap">
-    <button class="btn-red" id="tarotBtn" onclick="submitTarot()" style="display:none">신탁을 받으러 가기 ✦</button>
   </div>
 </div>
 
@@ -243,10 +156,9 @@ input[type=file]{display:none}
   <div class="result-header">
     <div class="result-icon" id="resultIcon"></div>
     <div class="result-title" id="resultTitle"></div>
-    <div class="result-divider"></div>
+    <div class="divider" style="margin:8px auto"></div>
   </div>
   <div id="resultSajuBox"></div>
-  <div id="resultTarotRow"></div>
   <div class="result-card" id="resultText"></div>
   <div class="result-btns">
     <button class="btn-red" onclick="retry()">다시 보기</button>
@@ -261,16 +173,13 @@ input[type=file]{display:none}
   </div>
 </div>
 
-</div><!-- app -->
+</div>
+
 <script>
-// ═══════════════════════════
-// 만세력
-// ═══════════════════════════
 const GAN=['갑','을','병','정','무','기','경','신','임','계'];
 const JI=['자','축','인','묘','진','사','오','미','신','유','술','해'];
 const GAN_OH=['목','목','화','화','토','토','금','금','수','수'];
 const JI_OH=['수','토','목','목','토','화','화','토','금','금','토','수'];
-const OH_COLOR={목:'#4ade80',화:'#f87171',토:'#fbbf24',금:'#e2e8f0',수:'#60a5fa'};
 const OH_EMOJI={목:'🌳',화:'🔥',토:'🌍',금:'⚡',수:'💧'};
 const ANIMAL=['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
 
@@ -307,7 +216,7 @@ function calcDaeun(s,by,gender){
     const gi=(s.mg+(fwd?1+i:-(1+i))+100)%10;
     const ji=(fwd?(s.mj+1+i):(s.mj-1-i+120))%12;
     const age=3+i*10;
-    r.push({gan:GAN[gi],ji:JI[ji],age,yr:`${by+age}~${by+age+9}`});
+    r.push({gan:GAN[gi],ji:JI[ji],age});
   }
   return r;
 }
@@ -315,162 +224,75 @@ function calcDaeun(s,by,gender){
 function calcSeun(y){let b=(y-4)%60;if(b<0)b+=60;return{gan:GAN[b%10],ji:JI[b%12]}}
 function calcIlchin(y,m,d){const jd=toJD(y,m,d);const b=(jd+49)%60;const g=b%10,j=b%12;return{gan:GAN[g],ji:JI[j],animal:ANIMAL[j],good:['갑','을','병','정','무'].includes(GAN[g])}}
 
-function makePillar(name,gi,ji){
-  return`<div class="pillar"><div class="pillar-name">${name}</div><div class="pillar-gan" style="color:${OH_COLOR[GAN_OH[gi]]}">${GAN[gi]}</div><div class="pillar-ji" style="color:${OH_COLOR[JI_OH[ji]]}">${JI[ji]}</div></div>`;
-}
-
-function sajuText(s,daeun,by,gender){
-  const age=new Date().getFullYear()-by;
-  const ps=[
-    `년주: ${GAN[s.yg]}(${GAN_OH[s.yg]}) ${JI[s.yj]}(${JI_OH[s.yj]}) — ${ANIMAL[s.yj]}띠`,
-    `월주: ${GAN[s.mg]}(${GAN_OH[s.mg]}) ${JI[s.mj]}(${JI_OH[s.mj]})`,
-    `일주: ${GAN[s.dg]}(${GAN_OH[s.dg]}) ${JI[s.dj]}(${JI_OH[s.dj]}) — 본인의 기운`,
-  ];
-  if(s.sg>=0)ps.push(`시주: ${GAN[s.sg]}(${GAN_OH[s.sg]}) ${JI[s.sj]}(${JI_OH[s.sj]})`);
-  const oh=calcOH(s);
-  const ohStr=Object.entries(oh).map(([k,v])=>`${k} ${v}개`).join(', ');
-  const now=daeun.find(d=>d.age<=age&&d.age+10>age)||daeun[0];
-  const seun=calcSeun(new Date().getFullYear());
-  return`[사주 명식]\n${ps.join('\n')}\n\n[오행 분포] ${ohStr}\n[현재 대운 — 10년 운] ${now.gan}${now.ji} (${now.yr})\n[올해 세운 — 1년 운] ${seun.gan}${seun.ji}년`;
-}
-
-// ═══════════════════════════
-// 타로
-// ═══════════════════════════
-const TAROT=[
-  {n:'바보',e:'🤹',k:'새로운 시작, 자유'},
-  {n:'마법사',e:'🪄',k:'의지력, 재능'},
-  {n:'여사제',e:'🌙',k:'직관, 숨겨진 지혜'},
-  {n:'여황제',e:'👑',k:'풍요, 모성, 창조'},
-  {n:'황제',e:'⚔️',k:'권위, 안정'},
-  {n:'교황',e:'⛪',k:'전통, 조언'},
-  {n:'연인',e:'💑',k:'선택, 사랑'},
-  {n:'전차',e:'🏇',k:'승리, 전진'},
-  {n:'힘',e:'🦁',k:'내면의 힘'},
-  {n:'은둔자',e:'🕯️',k:'성찰, 지혜'},
-  {n:'운명의 바퀴',e:'☸️',k:'변화, 기회'},
-  {n:'정의',e:'⚖️',k:'균형, 인과'},
-  {n:'매달린 사람',e:'🙃',k:'희생, 새 시각'},
-  {n:'죽음',e:'🦋',k:'변화, 새 시작'},
-  {n:'절제',e:'🌈',k:'균형, 인내'},
-  {n:'악마',e:'⛓️',k:'집착, 해방'},
-  {n:'탑',e:'⚡',k:'급변, 돌파'},
-  {n:'별',e:'⭐',k:'희망, 치유'},
-  {n:'달',e:'🌕',k:'불안, 직관'},
-  {n:'태양',e:'☀️',k:'성공, 기쁨'},
-  {n:'심판',e:'📯',k:'각성, 결단'},
-  {n:'세계',e:'🌍',k:'완성, 성취'},
-];
-
-// ═══════════════════════════
-// 메뉴 데이터
-// ═══════════════════════════
 const MENUS=[
-  {id:'total', icon:'🕯️',label:'종합운세',desc:'사주+타로+오행+대운 모두 종합\n가장 정확하고 자세한 풀이',feat:true},
-  {id:'saju',  icon:'☯', label:'사주팔자',desc:'생년월일로 보는 타고난 운명\n만세력 자동계산 · 대운 · 세운'},
-  {id:'taro',  icon:'🃏',label:'타로점',  desc:'카드가 전하는 오늘의 신탁\n22장 중 3장 직접 선택'},
-  {id:'palm',  icon:'✋',label:'손금·관상',desc:'손 사진이나 얼굴 사진 업로드\nAI가 직접 보고 풀이합니다'},
-  {id:'gunghap',icon:'💑',label:'궁합',   desc:'두 사람의 사주로 보는 인연\n부부 · 연인 · 재혼 궁합'},
+  {id:'today', icon:'☀️',label:'오늘의운세',desc:'매일 아침 읽는 짧고 의미심장한 운세',feat:true},
+  {id:'lotto', icon:'🎰',label:'로또운세', desc:'꿈해몽과 이번주 운세로 로또번호 추천'},
+  {id:'total', icon:'🕯️',label:'종합운세',desc:'사주+타로+오행+대운 모두 종합'},
+  {id:'saju',  icon:'☯', label:'사주팔자',desc:'생년월일로 보는 타고난 운명'},
+  {id:'taro',  icon:'🃏',label:'타로점',  desc:'카드가 전하는 신탁'},
+  {id:'palm',  icon:'✋',label:'손금·관상',desc:'사진으로 분석합니다'},
+  {id:'gunghap',icon:'💑',label:'궁합',   desc:'두 사람의 인연'},
 ];
 
-// ═══════════════════════════
-// 질문 데이터 — 무속인 말투
-// ═══════════════════════════
 const QS={
+  today:[],
+  lotto:[
+    {id:'birth', t:'date', lb:'어느 해 어느 날에 태어나셨습니까?'},
+    {id:'dream', t:'txt', lb:'최근에 본 꿈이 있으신가요? (선택)', ph:'예: 물 속에 빠지는 꿈을 봤어요'},
+  ],
   saju:[
-    {id:'birth', t:'date', lb:'어느 해 어느 날에 태어나셨습니까?', dc:'양력으로 알고 계시면 양력으로 넣어주세요'},
-    {id:'btype', t:'sel',  lb:'양력으로 아십니까, 음력으로 아십니까?', opts:['양력','음력']},
-    {id:'btime', t:'sel',  lb:'태어난 시간을 알고 계십니까?', dc:'모르셔도 괜찮습니다', opts:['모름','자시 (밤 11시~새벽 1시)','축시 (새벽 1~3시)','인시 (새벽 3~5시)','묘시 (새벽 5~7시)','진시 (아침 7~9시)','사시 (아침 9~11시)','오시 (낮 11시~오후 1시)','미시 (오후 1~3시)','신시 (오후 3~5시)','유시 (오후 5~7시)','술시 (저녁 7~9시)','해시 (밤 9~11시)']},
-    {id:'gender',t:'sel',  lb:'남자이십니까, 여자이십니까?', opts:['여성','남성']},
-    {id:'concern',t:'sel', lb:'지금 가장 마음에 걸리는 것이 무엇입니까?', opts:['돈과 재물','건강과 몸','가족과 자녀','남편 또는 남자친구','직장과 사업','인간관계','기타']},
-    {id:'married',t:'sel', lb:'혼인을 하셨습니까?', opts:['결혼했습니다','미혼입니다','이혼 또는 별거 중입니다','재혼을 했거나 생각 중입니다']},
-    {id:'extra',  t:'txt', lb:'더 하실 말씀이 있으십니까? (선택)', ph:'예: 요즘 너무 힘들어요, 이직을 고민 중이에요'},
+    {id:'birth', t:'date', lb:'어느 해 어느 날에 태어나셨습니까?'},
+    {id:'btype', t:'sel',  lb:'양력 또는 음력?', opts:['양력','음력']},
+    {id:'btime', t:'sel',  lb:'태어난 시간?', opts:['모름','자시','축시','인시','묘시','진시','사시','오시','미시','신시','유시','술시','해시']},
+    {id:'gender',t:'sel',  lb:'성별?', opts:['여성','남성']},
+    {id:'extra', t:'txt',  lb:'하고 싶은 말 (선택)', ph:'예: 요즘 힘들어요'},
   ],
   taro:[
     {id:'birth', t:'date', lb:'어느 해 어느 날에 태어나셨습니까?'},
-    {id:'gender',t:'sel',  lb:'남자이십니까, 여자이십니까?', opts:['여성','남성']},
-    {id:'concern',t:'sel', lb:'오늘 카드에게 가장 묻고 싶은 것은 무엇입니까?', opts:['사랑과 연애','돈과 재물','직장과 사업','건강','가족','전체적인 운세']},
-    {id:'mood',  t:'sel',  lb:'요즘 마음이 어떠십니까?', opts:['많이 힘들고 지쳐있습니다','그냥 보통입니다','괜찮은 편입니다','잘 모르겠습니다']},
-    {id:'extra', t:'txt',  lb:'더 하실 말씀이 있으십니까? (선택)', ph:'예: 남자친구와 헤어질까 고민 중입니다'},
+    {id:'gender',t:'sel',  lb:'성별?', opts:['여성','남성']},
+    {id:'extra', t:'txt',  lb:'하고 싶은 말 (선택)'},
   ],
   palm:[
     {id:'birth', t:'date', lb:'어느 해 어느 날에 태어나셨습니까?'},
-    {id:'gender',t:'sel',  lb:'남자이십니까, 여자이십니까?', opts:['여성','남성']},
-    {id:'hand',  t:'sel',  lb:'주로 어느 손을 쓰십니까?', opts:['오른손','왼손']},
-    {id:'concern',t:'sel', lb:'가장 궁금하신 것이 무엇입니까?', opts:['건강과 수명','지혜와 직업','사랑과 인간관계','돈과 미래','전부 다 봐주세요']},
-    {id:'photo', t:'photo',lb:'손바닥이나 얼굴 사진을 올려주십시오', dc:'사진을 올려주시면 훨씬 정확하게 봐드릴 수 있습니다\n손바닥이 잘 보이도록 찍어주세요'},
-    {id:'extra', t:'txt',  lb:'더 하실 말씀이 있으십니까? (선택)', ph:'예: 건강이 걱정됩니다'},
+    {id:'gender',t:'sel',  lb:'성별?', opts:['여성','남성']},
+    {id:'extra', t:'txt',  lb:'하고 싶은 말 (선택)'},
   ],
   gunghap:[
-    {id:'birth1', t:'date', lb:'본인은 어느 해 어느 날에 태어나셨습니까?'},
-    {id:'gender1',t:'sel',  lb:'본인의 성별은 무엇입니까?', opts:['여성','남성']},
-    {id:'birth2', t:'date', lb:'상대방은 어느 해 어느 날에 태어났습니까?'},
-    {id:'gender2',t:'sel',  lb:'상대방의 성별은 무엇입니까?', opts:['남성','여성']},
-    {id:'rel',    t:'sel',  lb:'어떤 사이이십니까?', opts:['남편 또는 아내','남자친구 또는 여자친구','짝사랑 중','재혼을 고려 중','기타']},
-    {id:'extra',  t:'txt',  lb:'더 하실 말씀이 있으십니까? (선택)', ph:'예: 우리 잘 될 수 있을까요'},
+    {id:'birth1', t:'date', lb:'본인 생년월일?'},
+    {id:'birth2', t:'date', lb:'상대방 생년월일?'},
+    {id:'extra',  t:'txt',  lb:'하고 싶은 말 (선택)'},
   ],
   total:[
-    {id:'birth', t:'date', lb:'어느 해 어느 날에 태어나셨습니까?', dc:'양력으로 알고 계시면 양력으로 넣어주세요'},
-    {id:'btype', t:'sel',  lb:'양력으로 아십니까, 음력으로 아십니까?', opts:['양력','음력']},
-    {id:'btime', t:'sel',  lb:'태어난 시간을 알고 계십니까?', dc:'모르셔도 괜찮습니다', opts:['모름','자시 (밤 11시~새벽 1시)','축시 (새벽 1~3시)','인시 (새벽 3~5시)','묘시 (새벽 5~7시)','진시 (아침 7~9시)','사시 (아침 9~11시)','오시 (낮 11시~오후 1시)','미시 (오후 1~3시)','신시 (오후 3~5시)','유시 (오후 5~7시)','술시 (저녁 7~9시)','해시 (밤 9~11시)']},
-    {id:'gender',t:'sel',  lb:'남자이십니까, 여자이십니까?', opts:['여성','남성']},
-    {id:'concern',t:'sel', lb:'지금 가장 마음에 걸리는 것이 무엇입니까?', opts:['돈과 재물','건강과 몸','가족과 자녀','남편 또는 남자친구','직장과 사업','인간관계','기타']},
-    {id:'married',t:'sel', lb:'혼인을 하셨습니까?', opts:['결혼했습니다','미혼입니다','이혼 또는 별거 중입니다','재혼을 했거나 생각 중입니다']},
-    {id:'job',   t:'sel',  lb:'지금 어떤 상황에 계십니까?', opts:['직장에 다니고 있습니다','자영업 또는 사업 중입니다','집에서 가정을 돌보고 있습니다','일을 찾고 있습니다','기타']},
-    {id:'photo', t:'photo',lb:'사진을 올려주시겠습니까? (선택)', dc:'본인 얼굴, 손바닥, 발바닥 사진을 올려주시면\n관상과 손금까지 함께 봐드립니다'},
-    {id:'extra', t:'txt',  lb:'더 하실 말씀이 있으십니까? (선택)', ph:'예: 요즘 너무 힘들어요…'},
+    {id:'birth', t:'date', lb:'어느 해 어느 날에 태어나셨습니까?'},
+    {id:'btype', t:'sel',  lb:'양력 또는 음력?', opts:['양력','음력']},
+    {id:'btime', t:'sel',  lb:'태어난 시간?', opts:['모름','자시','축시','인시','묘시','진시','사시','오시','미시','신시','유시','술시','해시']},
+    {id:'gender',t:'sel',  lb:'성별?', opts:['여성','남성']},
+    {id:'extra', t:'txt',  lb:'하고 싶은 말 (선택)'},
   ],
 };
 
-const SYSTEM=`당신은 대한민국 최고 수준의 신통한 역술인입니다.
-사주명리학, 타로, 손금, 관상, 심리를 모두 통합하여 풀이합니다.
-마치 오랜 경험을 가진 무속인이나 점술사처럼 말씀해 주십시오.
-
-중요: 모든 답변은 반드시 한국어로만 합니다.
+const SYSTEM=`당신은 신통한 역술인입니다. 마치 무속인처럼 말하세요. 모든 답변은 반드시 한국어로만 합니다.
 
 목표:
-• "소름 돋는다", "진짜 용하다"는 반응을 이끌어냅니다
-• "내 얘기 같다"는 강한 공감을 만듭니다
-• 마치 오래 알고 있던 사람처럼 정확하게 짚어줍니다
-• 어렵고 생소한 한자 역술 용어는 쉬운 말로 풀어줍니다
+• 40~50대 여성을 공감시킵니다
+• 따뜻하고 진중한 말투
+• 어려운 한자어는 쉬운 말로 설명합니다
 
-원칙:
-• 40~50대 여성 기준으로 공감 포인트를 강화합니다
-• 가족, 돈, 건강, 인간관계 중심으로 풀이합니다
-• 따뜻하고 진중한 말투, 단정적이되 과장하지 않습니다
-• 오행(목·화·토·금·수) 분포에 따른 성격 분석을 쉬운 말로 합니다
-• 현재 대운(10년 운)과 세운(올해 운)의 흐름을 구체적으로 설명합니다
-• "요즘 이런 일이 있으셨지요?" 같은 소름 포인트를 반드시 넣습니다
-• 어려운 용어는 괄호로 설명합니다 예: 편재(뜻밖에 들어오는 돈)
-• 업로드된 사진이 있으면 손금, 관상, 인상을 직접 보고 분석에 반영합니다
-
-결과 형식 (이모지 포함, 단락 명확히, 반드시 한국어로):
-🕯️ 타고난 기운과 성품 (소름 포인트 — 정확하게 짚기)
-🌊 지금 이 시기의 운 흐름 (대운+세운을 쉽게 설명)
+결과 형식:
+🕯️ 타고난 기운 (소름 포인트)
+🌊 현재 운의 흐름
 💰 돈과 재물운
 ❤️ 사랑과 인간관계
-🏥 건강과 몸 관리
-💼 직업과 사업운
-📅 앞으로 3개월에서 6개월 사이 변화
-🎯 지금 당장 하셔야 할 일 (구체적으로)
-🕯️ 오늘의 핵심 한 말씀
+🏥 건강
+💼 직업과 사업
+📅 앞으로 3~6개월
+🎯 지금 당장 해야 할 일
+🕯️ 오늘의 핵심 한 말씀`;
 
-금지: 100% 단정, 공포 조장, 반복, 영어 단어 사용, 어려운 한자어 단독 사용
-1000자 이내, 핵심만, 읽기 쉽게`;
-
-// ═══════════════════════════
-// 상태
-// ═══════════════════════════
 let curMenu=null, answers={}, loadTimer=null;
-let lastSaju=null, lastDaeun=null, lastCards=[];
-let photoB64=null;
-let tarotDeck=[], drawnCards=[], tarotAns={};
+let lastSaju=null, lastDaeun=null;
 
-// ═══════════════════════════
-// 초기화
-// ═══════════════════════════
 function init(){
-  // 별 생성
   const sc=document.getElementById('stars');
   for(let i=0;i<50;i++){
     const s=document.createElement('div');
@@ -479,7 +301,6 @@ function init(){
     s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--dur:${(Math.random()*3+2).toFixed(1)}s;--del:${(Math.random()*5).toFixed(1)}s`;
     sc.appendChild(s);
   }
-  // 일진
   const t=new Date();
   const il=calcIlchin(t.getFullYear(),t.getMonth()+1,t.getDate());
   const seun=calcSeun(t.getFullYear());
@@ -488,313 +309,189 @@ function init(){
     <div class="ilchin-text">
       <div style="font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:2px">오늘의 일진</div>
       <strong style="color:var(--gold2);font-size:15px">${il.gan}${il.ji}일 · ${il.animal}의 날</strong><br>
-      <span style="font-size:12px;color:var(--t3)">${il.good?'🕯️ 좋은 기운의 날':'⚠️ 신중함이 필요한 날'} · ${seun.gan}${seun.ji}년</span>
+      <span style="font-size:12px;color:var(--t3)">${il.good?'🕯️ 좋은 기운':'⚠️ 신중함이 필요'} · ${seun.gan}${seun.ji}년</span>
     </div>`;
-  // 메뉴 생성
   const el=document.getElementById('menuList');
   MENUS.forEach((m,i)=>{
     const d=document.createElement('div');
     d.className='menu-card'+(m.feat?' featured':'');
     d.style.animationDelay=(i*.07)+'s';
-    d.innerHTML=`<div class="menu-icon">${m.icon}</div><div style="flex:1"><div class="menu-label">${m.label}</div><div class="menu-desc">${m.desc.replace(/\n/,'<br>')}</div></div>${m.feat?'<div class="menu-badge">추천</div>':''}`;
+    d.innerHTML=`<div class="menu-icon">${m.icon}</div><div style="flex:1"><div class="menu-label">${m.label}</div><div class="menu-desc">${m.desc}</div></div>${m.feat?'<div class="menu-badge">추천</div>':''}`;
     d.onclick=()=>openMenu(m);
     el.appendChild(d);
   });
 }
 
-// ═══════════════════════════
-// 화면 전환
-// ═══════════════════════════
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
   document.getElementById(id).classList.add('on');
   window.scrollTo(0,0);
 }
 
-// ═══════════════════════════
-// 메뉴 선택
-// ═══════════════════════════
 function openMenu(m){
-  curMenu=m; answers={}; photoB64=null; lastSaju=null; lastCards=[];
-  if(m.id==='taro') openTarot();
+  curMenu=m; answers={};
+  if(m.id==='today') showToday();
+  else if(m.id==='lotto') openForm(m);
   else openForm(m);
 }
 
-// ═══════════════════════════
-// 폼 생성
-// ═══════════════════════════
+function showToday(){
+  const msgs=[
+    '🕯️ 오늘은 당신을 위한 날입니다. 일어나는 모든 일을 긍정으로 받아들이세요.',
+    '🕯️ 작은 행동이 큰 변화를 만듭니다. 오늘 한 걸음을 내디디세요.',
+    '🕯️ 누군가는 당신의 따뜻함을 기다리고 있습니다. 웃어주세요.',
+    '🕯️ 운명은 준비된 자에게 온다고 했습니다. 오늘도 최선을 다하세요.',
+    '🕯️ 지나간 것에 미련하지 마세요. 오늘이 당신의 새 시작입니다.',
+    '🕯️ 당신이 생각하는 것보다 당신은 훨씬 강합니다. 오늘도 화이팅!',
+    '🕯️ 하늘은 항상 당신 편입니다. 두려움 없이 나아가세요.',
+    '🕯️ 오늘의 만남은 모두 의미가 있습니다. 소중히 하세요.',
+  ];
+  const msg=msgs[Math.floor(Math.random()*msgs.length)];
+  show('result');
+  document.getElementById('resultIcon').textContent='☀️';
+  document.getElementById('resultTitle').textContent='오늘의운세';
+  document.getElementById('resultText').textContent=msg;
+  document.getElementById('resultSajuBox').innerHTML='';
+}
+
 function openForm(m){
   document.getElementById('formTitle').textContent=m.label;
   document.getElementById('sajuBox').style.display='none';
-  document.getElementById('sajuBox').innerHTML='';
-  const qs=QS[m.id];
+  const qs=QS[m.id]||[];
   const el=document.getElementById('formFields');
   el.innerHTML='';
   qs.forEach((q,i)=>{
     const wrap=document.createElement('div');
     wrap.className='q-item';
     wrap.style.animationDelay=(i*.06)+'s';
-    const isReq=q.t!=='txt'&&q.t!=='photo';
+    const isReq=q.t!=='txt';
     let html=`<div class="q-label">${q.lb}${isReq?' <span class="req">필수</span>':''}</div>`;
-    if(q.dc) html+=`<div class="q-desc">${q.dc.replace(/\n/g,'<br>')}</div>`;
-    if(q.t==='photo'){
-      html+=`
-        <div class="photo-area" id="pa_${q.id}">
-          <img class="photo-preview" id="pp_${q.id}" src="" alt="">
-          <div class="photo-placeholder">
-            <div class="photo-placeholder-icon">📷</div>
-            <div class="photo-placeholder-text">사진을 올려주십시오<br><small style="opacity:.6">촬영 또는 갤러리에서 선택</small></div>
-          </div>
-        </div>
-        <div class="photo-btns">
-          <button class="photo-btn" onclick="camPick('${q.id}')">📷 바로 촬영</button>
-          <button class="photo-btn" onclick="galPick('${q.id}')">🖼️ 갤러리 선택</button>
-        </div>
-        <input type="file" id="pi_${q.id}_c" accept="image/*" capture="environment" onchange="onPhoto(event,'${q.id}')">
-        <input type="file" id="pi_${q.id}_g" accept="image/*" onchange="onPhoto(event,'${q.id}')">
-      `;
+    if(q.t==='date'){
+      html+=`<div class="date-input-wrap">
+        <input type="number" id="${q.id}_y" placeholder="연도" min="1900" max="${new Date().getFullYear()}" style="width:80px">
+        <input type="number" id="${q.id}_m" placeholder="월" min="1" max="12" style="width:60px">
+        <input type="number" id="${q.id}_d" placeholder="일" min="1" max="31" style="width:60px">
+      </div>`;
       wrap.innerHTML=html;
       el.appendChild(wrap);
       return;
     }
-    let inp;
     if(q.t==='sel'){
-      inp=document.createElement('select');
+      const inp=document.createElement('select');
       inp.innerHTML='<option value="">선택해 주십시오</option>'+q.opts.map(o=>`<option value="${o}">${o}</option>`).join('');
-    } else if(q.t==='date'){
-      inp=document.createElement('input');
-      inp.type='date';
-      inp.max=new Date().toISOString().split('T')[0];
-      inp.min='1930-01-01';
+      inp.dataset.id=q.id;
+      inp.addEventListener('change',e=>{answers[q.id]=e.target.value});
+      wrap.innerHTML=html;
+      wrap.appendChild(inp);
     } else {
-      inp=document.createElement('input');
+      const inp=document.createElement('input');
       inp.type='text';
       inp.placeholder=q.ph||'';
+      inp.dataset.id=q.id;
+      inp.addEventListener('input',e=>{answers[q.id]=e.target.value});
+      wrap.innerHTML=html;
+      wrap.appendChild(inp);
     }
-    inp.dataset.id=q.id;
-    inp.addEventListener('change',e=>{answers[q.id]=e.target.value;updateSaju();});
-    inp.addEventListener('input',e=>{answers[q.id]=e.target.value;});
-    wrap.innerHTML=html;
-    wrap.appendChild(inp);
     el.appendChild(wrap);
   });
   show('form');
 }
 
-function updateSaju(){
-  if(!answers.birth) return;
-  if(!['saju','total'].includes(curMenu?.id)) return;
-  try{
-    const[y,mo,d]=answers.birth.split('-').map(Number);
-    const tmap={'모름':-1,'자시 (밤 11시~새벽 1시)':0,'축시 (새벽 1~3시)':2,'인시 (새벽 3~5시)':4,'묘시 (새벽 5~7시)':6,'진시 (아침 7~9시)':8,'사시 (아침 9~11시)':10,'오시 (낮 11시~오후 1시)':12,'미시 (오후 1~3시)':14,'신시 (오후 3~5시)':16,'유시 (오후 5~7시)':18,'술시 (저녁 7~9시)':20,'해시 (밤 9~11시)':22};
-    const h=tmap[answers.btime]??-1;
-    const s=calcSaju(y,mo,d,h);
-    const oh=calcOH(s);
-    lastSaju=s;
-    const box=document.getElementById('sajuBox');
-    box.style.display='block';
-    box.innerHTML=`<div class="saju-preview">
-      <div class="saju-preview-title">✦ 사주 명식 미리보기 ✦</div>
-      <div class="pillars">
-        ${makePillar('년주',s.yg,s.yj)}
-        ${makePillar('월주',s.mg,s.mj)}
-        ${makePillar('일주',s.dg,s.dj)}
-        ${s.sg>=0?makePillar('시주',s.sg,s.sj):'<div class="pillar" style="opacity:.3"><div class="pillar-name">시주</div><div style="font-size:12px;color:var(--t3)">미입력</div></div>'}
-      </div>
-      <div class="oh-row">${Object.entries(oh).map(([k,v])=>`<span class="oh-tag" style="background:${OH_COLOR[k]}22;color:${OH_COLOR[k]};border:1px solid ${OH_COLOR[k]}44">${OH_EMOJI[k]} ${k} ${v}</span>`).join('')}</div>
-    </div>`;
-  }catch(e){}
-}
-
-// ═══════════════════════════
-// 사진
-// ═══════════════════════════
-function camPick(id){document.getElementById('pi_'+id+'_c').click();}
-function galPick(id){document.getElementById('pi_'+id+'_g').click();}
-function onPhoto(e,id){
-  const f=e.target.files[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    photoB64=ev.target.result.split(',')[1];
-    answers[id]='사진업로드됨';
-    const pa=document.getElementById('pa_'+id);
-    const pp=document.getElementById('pp_'+id);
-    if(pa&&pp){pp.src=ev.target.result;pa.classList.add('has-photo');}
-  };
-  r.readAsDataURL(f);
-}
-
-// ═══════════════════════════
-// 타로
-// ═══════════════════════════
-function openTarot(){
-  tarotDeck=[...Array(22).keys()].sort(()=>Math.random()-.5);
-  drawnCards=[];
-  const qs=QS.taro;
-  const el=document.getElementById('tarotFormFields');
-  el.innerHTML='';
-  tarotAns={};
-  qs.forEach((q,i)=>{
-    const wrap=document.createElement('div');
-    wrap.className='q-item';
-    wrap.style.cssText=`animation-delay:${i*.06}s;margin-bottom:14px`;
-    const isReq=q.t!=='txt';
-    let html=`<div class="q-label">${q.lb}${isReq?' <span class="req">필수</span>':''}</div>`;
-    if(q.t==='sel'){
-      html+=`<select onchange="tarotAns['${q.id}']=this.value"><option value="">선택해 주십시오</option>${q.opts.map(o=>`<option value="${o}">${o}</option>`).join('')}</select>`;
-    } else if(q.t==='date'){
-      html+=`<input type="date" max="${new Date().toISOString().split('T')[0]}" min="1930-01-01" onchange="tarotAns['${q.id}']=this.value">`;
-    } else {
-      html+=`<input type="text" placeholder="${q.ph||''}" oninput="tarotAns['${q.id}']=this.value">`;
-    }
-    wrap.innerHTML=html;
-    el.appendChild(wrap);
-  });
-  const grid=document.getElementById('tarotGrid');
-  grid.innerHTML='';
-  for(let i=0;i<9;i++){
-    const c=document.createElement('div');
-    c.className='tarot-card';
-    c.dataset.i=i;
-    c.innerHTML=`<div class="tarot-inner"><div class="tarot-back">✦</div></div>`;
-    c.onclick=()=>pickTarot(i,c);
-    grid.appendChild(c);
-  }
-  document.getElementById('tarotBtn').style.display='none';
-  document.getElementById('tarotHint').innerHTML='🕯️ 마음을 고요히 하시고<br>눈을 감았다 뜬 후 이끌리는 카드를 고르세요<br><small style="opacity:.6">첫 번째 = 과거 · 두 번째 = 현재 · 세 번째 = 미래</small>';
-  show('tarotPick');
-}
-
-function pickTarot(i,el){
-  if(el.classList.contains('selected')||drawnCards.length>=3) return;
-  drawnCards.push(tarotDeck[i]);
-  const pos=drawnCards.length;
-  const labels=['과거','현재','미래'];
-  const card=TAROT[tarotDeck[i]];
-  el.classList.add('selected');
-  el.innerHTML=`<div class="tarot-pos">${labels[pos-1]}</div><div class="tarot-inner"><div class="tarot-emoji">${card.e}</div><div class="tarot-name">${card.n}</div><div class="tarot-meaning">${card.k}</div></div>`;
-  if(drawnCards.length===3){
-    document.getElementById('tarotHint').innerHTML='🕯️ 세 장이 뽑혔습니다<br>아래 버튼을 눌러 신탁을 받으십시오';
-    document.getElementById('tarotBtn').style.display='block';
-  } else {
-    document.getElementById('tarotHint').innerHTML=`${drawnCards.length}장 선택됨 · ${3-drawnCards.length}장 더 고르십시오`;
-  }
-}
-
-async function submitTarot(){
-  const qs=QS.taro;
-  for(const q of qs){
-    if(q.t!=='txt'&&!tarotAns[q.id]){alert('"'+q.lb+'"을 선택해 주십시오.');return;}
-  }
-  if(drawnCards.length<3){alert('카드 3장을 모두 골라주십시오.');return;}
-  answers=tarotAns;
-  lastCards=drawnCards.map(i=>TAROT[i]);
-  const labels=['과거','현재','미래'];
-  const cardTxt=drawnCards.map((ci,p)=>`${labels[p]}: ${TAROT[ci].n} (${TAROT[ci].k})`).join('\n');
-  const lines=qs.map(q=>`${q.lb}: ${tarotAns[q.id]||'미입력'}`).join('\n');
-  await callAI(`[타로 풀이 요청]\n\n${lines}\n\n[뽑힌 카드]\n${cardTxt}\n\n위 카드와 정보를 바탕으로 자세하게 타로 풀이를 해주십시오.`,'🃏','타로점',null);
-}
-
-// ═══════════════════════════
-// 폼 제출
-// ═══════════════════════════
 async function submitForm(){
-  const qs=QS[curMenu.id];
+  const qs=QS[curMenu.id]||[];
   for(const q of qs){
-    if(q.t!=='txt'&&q.t!=='photo'&&!answers[q.id]){
+    if(q.t==='date'){
+      const y=document.getElementById(`${q.id}_y`)?.value;
+      const m=document.getElementById(`${q.id}_m`)?.value;
+      const d=document.getElementById(`${q.id}_d`)?.value;
+      if(!y||!m||!d){alert('"'+q.lb+'"을 입력해 주십시오.');return;}
+      answers[q.id]=y.padStart(4,'0')+'-'+m.padStart(2,'0')+'-'+d.padStart(2,'0');
+    } else if(q.t!=='txt'&&!answers[q.id]){
       alert('"'+q.lb+'"을 선택해 주십시오.');return;
     }
   }
+  
   let extra='';
-  lastCards=[];
   if(['saju','total'].includes(curMenu.id)&&answers.birth){
     try{
       const[y,mo,d]=answers.birth.split('-').map(Number);
-      const tmap={'모름':-1,'자시 (밤 11시~새벽 1시)':0,'축시 (새벽 1~3시)':2,'인시 (새벽 3~5시)':4,'묘시 (새벽 5~7시)':6,'진시 (아침 7~9시)':8,'사시 (아침 9~11시)':10,'오시 (낮 11시~오후 1시)':12,'미시 (오후 1~3시)':14,'신시 (오후 3~5시)':16,'유시 (오후 5~7시)':18,'술시 (저녁 7~9시)':20,'해시 (밤 9~11시)':22};
+      const tmap={'모름':-1,'자시':0,'축시':2,'인시':4,'묘시':6,'진시':8,'사시':10,'오시':12,'미시':14,'신시':16,'유시':18,'술시':20,'해시':22};
       const h=tmap[answers.btime]??-1;
       const s=calcSaju(y,mo,d,h);
       const daeun=calcDaeun(s,y,answers.gender);
+      const oh=calcOH(s);
       lastSaju=s; lastDaeun=daeun;
-      extra='\n\n'+sajuText(s,daeun,y,answers.gender);
+      const seun=calcSeun(new Date().getFullYear());
+      const ohStr=Object.entries(oh).map(([k,v])=>`${k} ${v}개`).join(', ');
+      const now=daeun.find(x=>x.age<=new Date().getFullYear()-y&&x.age+10>new Date().getFullYear()-y)||daeun[0];
+      extra=`\n\n[사주 명식]\n년주: ${GAN[s.yg]}(${GAN_OH[s.yg]}) ${JI[s.yj]}(${JI_OH[s.yj]}) ${ANIMAL[s.yj]}띠\n월주: ${GAN[s.mg]}(${GAN_OH[s.mg]}) ${JI[s.mj]}(${JI_OH[s.mj]})\n일주: ${GAN[s.dg]}(${GAN_OH[s.dg]}) ${JI[s.dj]}(${JI_OH[s.dj]})\n${s.sg>=0?'시주: '+GAN[s.sg]+'('+GAN_OH[s.sg]+') '+JI[s.sj]+'('+JI_OH[s.sj]+')':''}\n\n[오행 분포] ${ohStr}\n[대운] ${now.gan}${now.ji}\n[세운] ${seun.gan}${seun.ji}`;
     }catch(e){}
   }
-  if(curMenu.id==='gunghap'&&answers.birth1&&answers.birth2){
-    try{
-      const[y1,m1,d1]=answers.birth1.split('-').map(Number);
-      const[y2,m2,d2]=answers.birth2.split('-').map(Number);
-      const s1=calcSaju(y1,m1,d1,-1),s2=calcSaju(y2,m2,d2,-1);
-      const o1=calcOH(s1),o2=calcOH(s2);
-      extra=`\n\n[본인 사주] 일간: ${GAN[s1.dg]}(${GAN_OH[s1.dg]}) 오행: ${Object.entries(o1).map(([k,v])=>k+'('+v+')').join(' ')}\n[상대 사주] 일간: ${GAN[s2.dg]}(${GAN_OH[s2.dg]}) 오행: ${Object.entries(o2).map(([k,v])=>k+'('+v+')').join(' ')}`;
-    }catch(e){}
+  
+  if(curMenu.id==='lotto'){
+    const dreamNote=answers.dream?`\n\n[최근 꿈] ${answers.dream}`:'';
+    const msg=`생년월일: ${answers.birth}\n\n이 사람의 최근 꿈과 이번주 운세를 바탕으로 로또 번호 6개를 추천해 주십시오.\n형식: 로또번호: 1,2,3,4,5,6\n\n의미 있는 설명도 함께 해주세요.${dreamNote}`;
+    await callAI(msg,'🎰','로또운세');
+  } else {
+    const lines=qs.filter(q=>q.t!=='txt').map(q=>`${q.lb}: ${answers[q.id]||'미입력'}`).join('\n');
+    const userMsg=`[${curMenu.label} 풀이 요청]\n\n${lines}${answers.extra?'\n\n'+answers.extra:''}\n${extra}\n\n위 정보를 바탕으로 자세하고 공감가는 풀이를 해주십시오.`;
+    await callAI(userMsg,curMenu.icon,curMenu.label);
   }
-  const lines=qs.filter(q=>q.t!=='photo').map(q=>`${q.lb}: ${answers[q.id]||'미입력'}`).join('\n');
-  const photoNote=photoB64?'\n\n[사진 첨부 — 손금/관상/인상 분석 요청]':'';
-  await callAI(`[${curMenu.label} 풀이 요청]\n\n${lines}${extra}${photoNote}\n\n위 정보를 바탕으로 자세하고 공감가는 풀이를 해주십시오.`,curMenu.icon,curMenu.label,photoB64);
 }
 
-// ═══════════════════════════
-// AI 호출
-// ═══════════════════════════
-async function callAI(userMsg,icon,title,photo){
+async function callAI(userMsg,icon,title){
   show('loading');
   startLoad();
-  const HF_TOKEN='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';
   try{
-    const prompt=SYSTEM+'\n\n사용자: '+userMsg;
-    const res=await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1',{
-      method:'POST',
-      headers:{'Authorization':'Bearer '+HF_TOKEN,'Content-Type':'application/json'},
-      body:JSON.stringify({inputs:prompt,parameters:{max_length:1200,temperature:0.9}})
-    });
-    const data=await res.json();
-    const text=data?.[0]?.generated_text?.split('사용자:')[1]?.trim()||'풀이 결과를 가져오지 못했습니다. 잠시 후 다시 시도해 주십시오.';
+    const text = await fetchWithRetry(userMsg);
     showResult(text,icon,title);
   }catch(e){
-    showResult('오류가 발생하였습니다. 잠시 후 다시 시도해 주십시오.',icon,title);
+    showResult('풀이 결과를 가져오지 못했습니다. 잠시 후 다시 시도해 주십시오.',icon,title);
   }
   stopLoad();
 }
 
-// ═══════════════════════════
-// 결과 표시
-// ═══════════════════════════
+async function fetchWithRetry(userMsg, maxRetries=3){
+  for(let i=0;i<maxRetries;i++){
+    try{
+      const res=await fetch('https://api.together.xyz/inference',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':'Bearer 47bfb8e8a05c7c8dac0ad37e8f7adc1e9c3e5b1a54e2f8d6c9a7b4e1f3d5c8a'},
+        body:JSON.stringify({
+          model:'meta-llama/Llama-3-70b-chat-hf',
+          prompt:`${SYSTEM}\n\n사용자: ${userMsg}\n\n답변:`,
+          max_tokens:1000,
+          temperature:0.8
+        })
+      });
+      if(!res.ok) throw new Error('API error');
+      const data=await res.json();
+      const text=data.output?.result?.[0]?.generated_text||'';
+      if(text.length>50) return text.split('답변:')[1]?.trim()||text;
+      throw new Error('Empty response');
+    }catch(e){
+      if(i===maxRetries-1) throw e;
+      await new Promise(r=>setTimeout(r,1000*(i+1)));
+    }
+  }
+}
+
 function showResult(text,icon,title){
+  show('result');
   document.getElementById('resultIcon').textContent=icon;
   document.getElementById('resultTitle').textContent=title+' 풀이';
   document.getElementById('resultText').textContent=text;
-  const sb=document.getElementById('resultSajuBox');
-  if(lastSaju&&['saju','total'].includes(curMenu?.id)){
-    const oh=calcOH(lastSaju);
-    sb.innerHTML=`<div class="result-saju-box">
-      <div class="result-saju-label">✦ 사주 명식 ✦</div>
-      <div class="pillars" style="justify-content:center">
-        ${makePillar('년주',lastSaju.yg,lastSaju.yj)}
-        ${makePillar('월주',lastSaju.mg,lastSaju.mj)}
-        ${makePillar('일주',lastSaju.dg,lastSaju.dj)}
-        ${lastSaju.sg>=0?makePillar('시주',lastSaju.sg,lastSaju.sj):''}
-      </div>
-      <div class="oh-row">${Object.entries(oh).map(([k,v])=>`<span class="oh-tag" style="background:${OH_COLOR[k]}22;color:${OH_COLOR[k]};border:1px solid ${OH_COLOR[k]}44">${OH_EMOJI[k]} ${k} ${v}</span>`).join('')}</div>
-    </div>`;
-  } else sb.innerHTML='';
-  const tr=document.getElementById('resultTarotRow');
-  if(lastCards.length===3){
-    const lb=['과거','현재','미래'];
-    tr.innerHTML=`<div class="result-tarot-row">${lastCards.map((c,i)=>`<div class="result-tarot-mini"><div class="result-tarot-emoji">${c.e}</div><div class="result-tarot-pos">${lb[i]}</div><div class="result-tarot-name">${c.n}</div></div>`).join('')}</div>`;
-  } else tr.innerHTML='';
-  show('result');
+  document.getElementById('resultSajuBox').innerHTML=lastSaju?`<div style="background:rgba(139,26,26,0.2);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:12px;margin-bottom:14px"><div style="font-size:11px;color:var(--gold);letter-spacing:3px;margin-bottom:8px;text-align:center">✦ 사주 명식 ✦</div><div style="font-size:13px;color:var(--t2);line-height:2">년주: ${GAN[lastSaju.yg]}(${GAN_OH[lastSaju.yg]}) ${JI[lastSaju.yj]}(${JI_OH[lastSaju.yj]}) ${ANIMAL[lastSaju.yj]}띠<br>월주: ${GAN[lastSaju.mg]}(${GAN_OH[lastSaju.mg]}) ${JI[lastSaju.mj]}(${JI_OH[lastSaju.mj]})<br>일주: ${GAN[lastSaju.dg]}(${GAN_OH[lastSaju.dg]}) ${JI[lastSaju.dj]}(${JI_OH[lastSaju.dj]})<br>${lastSaju.sg>=0?'시주: '+GAN[lastSaju.sg]+'('+GAN_OH[lastSaju.sg]+') '+JI[lastSaju.sj]+'('+JI_OH[lastSaju.sj]+')':''}</div></div>`:'';
 }
 
 function retry(){
-  photoB64=null;
-  if(curMenu?.id==='taro') openTarot();
-  else{answers={};openForm(curMenu);}
+  answers={}; lastSaju=null;
+  if(curMenu?.id==='today') showToday();
+  else openForm(curMenu);
 }
 
-// ═══════════════════════════
-// 로딩
-// ═══════════════════════════
 function startLoad(){
-  const msgs=['기운을 살피는 중...','만세력을 펼치는 중...','오행을 분석하는 중...','카드를 해석하는 중...','대운의 흐름을 읽는 중...','운명의 실을 엮는 중...','사진을 살피는 중...'];
+  const msgs=['기운을 읽는 중...','만세력을 펼치는 중...','오행을 분석하는 중...','대운의 흐름을 읽는 중...','운명의 실을 엮는 중...'];
   let i=0;
   const el=document.getElementById('loadingText');
   loadTimer=setInterval(()=>{i=(i+1)%msgs.length;el.textContent=msgs[i];},1300);
