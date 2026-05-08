@@ -16,13 +16,11 @@ html,body{height:100%;background:var(--bg);font-family:'Noto Serif KR',serif;col
 #app{min-height:100vh;min-height:100dvh;background:linear-gradient(170deg,#0d0000,#1a0500 50%,#0d0000)}
 .stars{position:fixed;inset:0;pointer-events:none;z-index:0}
 .star{position:absolute;border-radius:50%;background:#c9a84c;animation:twinkle var(--dur) var(--del) infinite}
-.screen{position:relative;z-index:1;padding:50px 22px 80px;max-width:420px;margin:0 auto;min-height:100vh;min-height:100dvh;display:none;flex-direction:column}
+.screen{position:relative;z-index:1;padding:50px 22px 80px;max-width:420px;margin:0 auto;min-height:100vh;display:none;flex-direction:column}
 .screen.on{display:flex}
 .back-btn{background:none;border:none;color:var(--gold);font-size:20px;cursor:pointer;padding:4px 0;margin-bottom:18px;font-family:'Noto Serif KR',serif;text-align:left}
 .btn-red{width:100%;padding:16px;border-radius:4px;border:1px solid var(--gold);background:linear-gradient(135deg,#6b0f0f,#8b1a1a);color:var(--gold2);font-size:17px;font-family:'Noto Serif KR',serif;font-weight:700;cursor:pointer;letter-spacing:3px;-webkit-appearance:none;margin-top:4px}
 .btn-ghost{width:100%;padding:14px;border-radius:4px;border:1px solid rgba(201,168,76,0.3);background:transparent;color:var(--t2);font-size:15px;font-family:'Noto Serif KR',serif;cursor:pointer;margin-top:4px}
-
-/* 홈 */
 #home{align-items:center;justify-content:center;text-align:center}
 .candle{width:60px;height:80px;margin:0 auto 20px;position:relative}
 .candle-body{width:24px;height:50px;background:linear-gradient(180deg,#f5e6d0,#e8c89a);border-radius:2px;position:absolute;bottom:0;left:50%;transform:translateX(-50%)}
@@ -38,8 +36,6 @@ html,body{height:100%;background:var(--bg);font-family:'Noto Serif KR',serif;col
 .creator{text-align:center;margin-top:16px}
 .creator-name{font-size:14px;color:var(--gold);font-weight:700;letter-spacing:3px}
 .creator-sub{font-size:11px;color:var(--t3);margin-top:3px}
-
-/* 메뉴 */
 .menu-title{font-size:22px;font-weight:700;color:var(--gold2);margin-bottom:6px}
 .menu-sub{font-size:13px;color:var(--t3);margin-bottom:22px;line-height:1.8}
 .menu-list{display:flex;flex-direction:column;gap:11px}
@@ -50,8 +46,6 @@ html,body{height:100%;background:var(--bg);font-family:'Noto Serif KR',serif;col
 .menu-label{font-size:16px;font-weight:700;color:var(--gold2)}
 .menu-desc{font-size:12px;color:var(--t3);margin-top:2px;line-height:1.4}
 .menu-badge{margin-left:auto;flex-shrink:0;background:linear-gradient(135deg,#6b0f0f,#8b1a1a);color:var(--gold2);font-size:10px;font-weight:700;padding:3px 8px;border-radius:2px;border:1px solid rgba(201,168,76,0.3)}
-
-/* 폼 */
 .q-header{text-align:center;margin-bottom:20px}
 .q-shaman{font-size:12px;color:var(--gold);letter-spacing:2px;margin-bottom:5px}
 .q-title{font-size:20px;font-weight:700;color:var(--gold2);letter-spacing:2px}
@@ -65,39 +59,15 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .date-wrap{display:flex;gap:6px}
 .date-wrap input{text-align:center;padding:13px 6px}
 .date-wrap input::placeholder{font-size:12px}
-
-/* 타로 */
-.tarot-hint{font-size:13px;color:var(--t2);text-align:center;line-height:1.8;padding:12px;background:rgba(139,26,26,0.2);border-radius:4px;margin:10px 0}
-.tarot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:10px 0}
-.t-card{aspect-ratio:2/3;border-radius:4px;border:1px solid rgba(201,168,76,0.25);background:linear-gradient(135deg,#1a0500,#0d0000);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden}
-.t-card:active{opacity:.7}
-.t-card.sel{border-color:var(--gold);box-shadow:0 0 14px rgba(201,168,76,0.4);background:linear-gradient(135deg,rgba(139,26,26,0.4),#0d0000)}
-.t-inner{display:flex;flex-direction:column;align-items:center;padding:6px;text-align:center;gap:3px}
-.t-emoji{font-size:24px}
-.t-name{font-size:10px;color:var(--gold);font-weight:700;line-height:1.3}
-.t-meaning{font-size:9px;color:var(--t3);line-height:1.2}
-.t-pos{position:absolute;top:0;left:0;right:0;text-align:center;font-size:9px;font-weight:700;color:var(--gold2);background:rgba(13,0,0,0.8);padding:2px}
-
-/* 로딩 */
 #loading{align-items:center;justify-content:center;text-align:center}
 .load-icon{font-size:56px;animation:flicker 1.2s ease-in-out infinite;margin-bottom:22px}
 .load-text{font-size:17px;color:var(--gold);letter-spacing:2px;animation:glow 1.5s ease-in-out infinite}
 .load-sub{font-size:13px;color:var(--t3);margin-top:10px;line-height:1.8}
-
-/* 결과 */
 .res-header{text-align:center;margin-bottom:16px}
 .res-icon{font-size:34px;margin-bottom:5px}
 .res-title{font-size:19px;font-weight:700;color:var(--gold2);letter-spacing:2px}
-.res-saju{background:rgba(139,26,26,0.2);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:12px;margin-bottom:12px;font-size:13px;color:var(--t2);line-height:2}
-.res-saju-title{font-size:11px;color:var(--gold);letter-spacing:2px;margin-bottom:7px;text-align:center}
-.res-tarot{display:flex;gap:7px;margin-bottom:12px}
-.res-t-mini{flex:1;text-align:center;background:rgba(139,26,26,0.15);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:7px 4px}
-.res-t-mini-e{font-size:19px}
-.res-t-mini-p{font-size:9px;color:var(--t3)}
-.res-t-mini-n{font-size:11px;color:var(--gold);font-weight:700}
-.res-card{background:linear-gradient(135deg,rgba(139,26,26,0.15),rgba(13,0,0,0.85));border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:18px 15px;white-space:pre-wrap;line-height:2;font-size:15px;color:var(--t);margin-bottom:16px}
+.res-card{background:linear-gradient(135deg,rgba(139,26,26,0.15),rgba(13,0,0,0.85));border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:18px 15px;white-space:pre-wrap;line-height:2;font-size:15px;color:var(--t);margin-bottom:16px;max-height:60vh;overflow-y:auto}
 .disclaimer{text-align:center;font-size:11px;color:rgba(201,168,76,0.2);margin-top:16px;line-height:1.8}
-
 @keyframes twinkle{0%,100%{opacity:0}50%{opacity:1}}
 @keyframes flicker{0%,100%{transform:scale(1) rotate(-1deg)}50%{transform:scale(1.06) rotate(1deg)}}
 @keyframes glow{0%,100%{text-shadow:0 0 8px rgba(201,168,76,.3)}50%{text-shadow:0 0 22px rgba(201,168,76,.9)}}
@@ -110,7 +80,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 <div id="app">
 <div class="stars" id="stars"></div>
 
-<!-- 홈 -->
 <div class="screen on" id="home">
   <div class="candle">
     <div class="candle-glow"></div>
@@ -123,7 +92,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   <div class="trust-box">
     <div class="trust-item">🕯️ 30년 역술 데이터 기반 인공지능 분석</div>
     <div class="trust-item">🕯️ 사주 · 타로 · 손금 · 관상 종합 판단</div>
-    <div class="trust-item">🕯️ 사진 업로드시 더욱 정확한 분석 가능</div>
     <div class="trust-item">🕯️ 어려운 용어 없이 쉽게 풀어드립니다</div>
   </div>
   <button class="btn-red" onclick="show('menu')">입장하기 ✦</button>
@@ -134,7 +102,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   </div>
 </div>
 
-<!-- 메뉴 -->
 <div class="screen" id="menu">
   <button class="back-btn" onclick="show('home')">← 뒤로</button>
   <div class="menu-title">무엇을 보여드릴까요</div>
@@ -145,7 +112,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   </div>
 </div>
 
-<!-- 폼 -->
 <div class="screen" id="form">
   <button class="back-btn" onclick="show('menu')">← 뒤로</button>
   <div class="q-header">
@@ -153,37 +119,18 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="q-title" id="formTitle"></div>
     <div class="divider" style="margin:10px auto"></div>
   </div>
-  <div id="sajuPreview" style="display:none"></div>
   <div class="q-list" id="formFields"></div>
   <div style="margin-top:24px">
     <button class="btn-red" onclick="submitForm()">점 보러 가기 ✦</button>
   </div>
 </div>
 
-<!-- 타로 -->
-<div class="screen" id="tarotScreen">
-  <button class="back-btn" onclick="show('menu')">← 뒤로</button>
-  <div class="q-header">
-    <div class="q-shaman">🕯️ 신통한 운명풀이 🕯️</div>
-    <div class="q-title">타로점</div>
-    <div class="divider" style="margin:10px auto"></div>
-  </div>
-  <div id="tarotFields"></div>
-  <div class="tarot-hint" id="tarotHint">🕯️ 마음을 고요히 하시고<br>이끌리는 카드를 순서대로 3장 고르세요<br><small style="opacity:.6">과거 · 현재 · 미래</small></div>
-  <div class="tarot-grid" id="tarotGrid"></div>
-  <div style="margin-top:16px">
-    <button class="btn-red" id="tarotBtn" onclick="submitTarot()" style="display:none">신탁을 받으러 가기 ✦</button>
-  </div>
-</div>
-
-<!-- 로딩 -->
 <div class="screen" id="loading">
   <div class="load-icon">🕯️</div>
   <div class="load-text" id="loadTxt">기운을 읽는 중...</div>
   <div class="load-sub">잠시만 기다려 주십시오<br>정성껏 살피고 있습니다...</div>
 </div>
 
-<!-- 결과 -->
 <div class="screen" id="result">
   <button class="back-btn" onclick="show('menu')">← 뒤로</button>
   <div class="res-header">
@@ -191,8 +138,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="res-title" id="resTitle"></div>
     <div class="divider" style="margin:8px auto"></div>
   </div>
-  <div id="resSaju"></div>
-  <div id="resTarot"></div>
   <div class="res-card" id="resText"></div>
   <button class="btn-red" onclick="retry()">다시 보기</button>
   <button class="btn-ghost" onclick="show('menu')">다른 운세 보기</button>
@@ -204,96 +149,45 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 
 </div>
 <script>
-const GAN=['갑','을','병','정','무','기','경','신','임','계'];
-const JI=['자','축','인','묘','진','사','오','미','신','유','술','해'];
-const GAN_OH=['목','목','화','화','토','토','금','금','수','수'];
-const JI_OH=['수','토','목','목','토','화','화','토','금','금','토','수'];
-const OH_C={목:'#4ade80',화:'#f87171',토:'#fbbf24',금:'#e2e8f0',수:'#60a5fa'};
-const ANI=['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
-const BTIME=['모름','자시','축시','인시','묘시','진시','사시','오시','미시','신시','유시','술시','해시'];
-const BTIME_H={'모름':-1,'자시':0,'축시':2,'인시':4,'묘시':6,'진시':8,'사시':10,'오시':12,'미시':14,'신시':16,'유시':18,'술시':20,'해시':22};
-
-const TAROT=[
-  {n:'바보',e:'🤹',k:'새로운 시작'},
-  {n:'마법사',e:'🪄',k:'의지, 재능'},
-  {n:'여사제',e:'🌙',k:'직관, 지혜'},
-  {n:'여황제',e:'👑',k:'풍요, 모성'},
-  {n:'황제',e:'⚔️',k:'권위, 안정'},
-  {n:'교황',e:'⛪',k:'전통, 조언'},
-  {n:'연인',e:'💑',k:'선택, 사랑'},
-  {n:'전차',e:'🏇',k:'승리, 전진'},
-  {n:'힘',e:'🦁',k:'내면의 힘'},
-  {n:'은둔자',e:'🕯️',k:'성찰, 지혜'},
-  {n:'운명의 바퀴',e:'☸️',k:'변화, 기회'},
-  {n:'정의',e:'⚖️',k:'균형, 인과'},
-  {n:'매달린 사람',e:'🙃',k:'희생, 새 시각'},
-  {n:'죽음',e:'🦋',k:'변화, 시작'},
-  {n:'절제',e:'🌈',k:'균형, 인내'},
-  {n:'악마',e:'⛓️',k:'집착, 해방'},
-  {n:'탑',e:'⚡',k:'급변, 돌파'},
-  {n:'별',e:'⭐',k:'희망, 치유'},
-  {n:'달',e:'🌕',k:'불안, 직관'},
-  {n:'태양',e:'☀️',k:'성공, 기쁨'},
-  {n:'심판',e:'📯',k:'각성, 결단'},
-  {n:'세계',e:'🌍',k:'완성, 성취'},
-];
-
 const MENUS=[
-  {id:'today', icon:'☀️',label:'오늘의운세',desc:'매일 아침 의미심장한 한 말씀',feat:true},
-  {id:'lotto', icon:'🎱',label:'로또운세',desc:'꿈해몽 + 이번주 운세로 번호 추천'},
-  {id:'total', icon:'🕯️',label:'종합운세',desc:'사주+타로+오행+대운 종합 풀이'},
-  {id:'saju',  icon:'☯',label:'사주팔자',desc:'타고난 운명 분석'},
-  {id:'taro',  icon:'🃏',label:'타로점',desc:'카드가 전하는 신탁'},
-  {id:'palm',  icon:'✋',label:'손금·관상',desc:'손 사진으로 분석'},
+  {id:'today',icon:'☀️',label:'오늘의운세',desc:'매일 아침 의미심장한 한 말씀',feat:true},
+  {id:'total',icon:'🕯️',label:'종합운세',desc:'사주+타로+오행+대운 종합'},
+  {id:'saju',icon:'☯',label:'사주팔자',desc:'타고난 운명 분석'},
+  {id:'taro',icon:'🃏',label:'타로점',desc:'카드가 전하는 신탁'},
+  {id:'palm',icon:'✋',label:'손금·관상',desc:'손 사진으로 분석'},
   {id:'gunghap',icon:'💑',label:'궁합',desc:'두 사람의 인연'},
 ];
 
 const QS={
-  lotto:[
-    {id:'birth',t:'date',lb:'어느 해 어느 날에 태어나셨습니까?'},
-    {id:'dream',t:'txt',lb:'최근에 본 꿈 (선택)',ph:'예: 물에 빠지는 꿈'},
-  ],
+  today:[],
   saju:[
     {id:'birth',t:'date',lb:'생년월일이 어떻게 됩니까?'},
-    {id:'btype',t:'sel',lb:'양력입니까, 음력입니까?',opts:['양력','음력']},
-    {id:'btime',t:'sel',lb:'태어난 시간이 어떻게 됩니까?',opts:BTIME},
-    {id:'gender',t:'sel',lb:'남자이십니까, 여자이십니까?',opts:['여성','남성']},
-    {id:'concern',t:'sel',lb:'가장 마음에 걸리는 것이 무엇입니까?',opts:['돈과 재물','건강','가족','남편·남자친구','직장·사업','인간관계']},
-    {id:'extra',t:'txt',lb:'하고 싶은 말씀 (선택)',ph:'예: 요즘 너무 힘들어요'},
+    {id:'gender',t:'sel',lb:'성별?',opts:['여성','남성']},
+    {id:'concern',t:'sel',lb:'가장 마음에 걸리는 것?',opts:['돈','건강','가족','남편','직장','인간관계']},
   ],
   taro:[
     {id:'birth',t:'date',lb:'생년월일이 어떻게 됩니까?'},
-    {id:'gender',t:'sel',lb:'성별이 어떻게 됩니까?',opts:['여성','남성']},
-    {id:'concern',t:'sel',lb:'카드에게 가장 묻고 싶은 것은?',opts:['사랑·연애','돈·재물','직장·사업','건강','가족','전체']},
-    {id:'extra',t:'txt',lb:'하고 싶은 말씀 (선택)'},
+    {id:'gender',t:'sel',lb:'성별?',opts:['여성','남성']},
+    {id:'concern',t:'sel',lb:'가장 궁금한 것은?',opts:['사랑','돈','직장','건강','가족','전체']},
   ],
   palm:[
     {id:'birth',t:'date',lb:'생년월일이 어떻게 됩니까?'},
     {id:'gender',t:'sel',lb:'성별?',opts:['여성','남성']},
-    {id:'concern',t:'sel',lb:'가장 궁금한 것은?',opts:['건강·수명','지혜·직업','사랑·인간관계','돈·미래','전부']},
-    {id:'extra',t:'txt',lb:'하고 싶은 말씀 (선택)'},
   ],
   gunghap:[
     {id:'birth1',t:'date',lb:'본인 생년월일?'},
-    {id:'gender1',t:'sel',lb:'본인 성별?',opts:['여성','남성']},
     {id:'birth2',t:'date',lb:'상대방 생년월일?'},
-    {id:'gender2',t:'sel',lb:'상대방 성별?',opts:['남성','여성']},
-    {id:'rel',t:'sel',lb:'어떤 사이입니까?',opts:['남편·아내','남자친구·여자친구','짝사랑','재혼 고려','기타']},
-    {id:'extra',t:'txt',lb:'하고 싶은 말씀 (선택)'},
   ],
   total:[
     {id:'birth',t:'date',lb:'생년월일이 어떻게 됩니까?'},
-    {id:'btype',t:'sel',lb:'양력입니까, 음력입니까?',opts:['양력','음력']},
-    {id:'btime',t:'sel',lb:'태어난 시간이 어떻게 됩니까?',opts:BTIME},
-    {id:'gender',t:'sel',lb:'남자이십니까, 여자이십니까?',opts:['여성','남성']},
-    {id:'concern',t:'sel',lb:'가장 마음에 걸리는 것?',opts:['돈과 재물','건강','가족','남편·남자친구','직장·사업','인간관계']},
-    {id:'extra',t:'txt',lb:'하고 싶은 말씀 (선택)',ph:'예: 요즘 너무 힘들어요'},
+    {id:'gender',t:'sel',lb:'성별?',opts:['여성','남성']},
+    {id:'concern',t:'sel',lb:'가장 마음에 걸리는 것?',opts:['돈','건강','가족','남편','직장','인간관계']},
   ],
 };
 
 const SYSTEM=`당신은 신통한 역술인입니다. 무속인처럼 따뜻하고 진중하게 말하세요. 반드시 한국어로만 답하세요.
 
-목표: "소름 돋는다", "내 얘기 같다" 반응을 이끌어냅니다. 40~50대 여성에게 공감합니다. 어려운 한자어는 쉬운 말로 풀어줍니다.
+목표: "소름 돋는다", "내 얘기 같다" 반응을 이끌어냅니다. 40~50대 여성에게 공감합니다.
 
 결과 형식:
 🕯️ 타고난 기운 (소름 포인트)
@@ -302,64 +196,35 @@ const SYSTEM=`당신은 신통한 역술인입니다. 무속인처럼 따뜻하�
 ❤️ 사랑과 인간관계
 🏥 건강
 💼 직업과 사업
-📅 앞으로 3~6개월
+📅 앞으로 변화
 🎯 지금 당장 해야 할 일
 🕯️ 핵심 한 말씀
 
-금지: 100% 단정, 공포, 영어 단어, 어려운 한자어 단독 사용`;
+금지: 100% 단정, 공포, 영어, 어려운 한자어 단독 사용`;
 
-function toJD(y,m,d){const a=Math.floor((14-m)/12),yr=y+4800-a,mn=m+12*a-3;return d+Math.floor((153*mn+2)/5)+365*yr+Math.floor(yr/4)-Math.floor(yr/100)+Math.floor(yr/400)-32045}
-function getMonthJi(m,d){const c=[6,4,6,5,6,6,7,8,8,8,7,7];let mo=m-1;if(d<c[mo])mo=(mo+11)%12;return(mo+2)%12}
-function calcSaju(y,m,d,h){
-  let yb=(y-4)%60;if(yb<0)yb+=60;
-  const yg=yb%10,yj=yb%12,mj=getMonthJi(m,d);
-  const mg=([2,4,6,8,0,2,4,6,8,0][yg]+mj)%10;
-  const jd=toJD(y,m,d),db=(jd+49)%60,dg=db%10,dj=db%12;
-  let sg=-1,sj=-1;
-  if(h>=0){sj=Math.floor(h/2)%12;sg=(dg%5*2+sj)%10;}
-  return{yg,yj,mg,mj,dg,dj,sg,sj};
-}
-function calcOH(s){
-  const o={목:0,화:0,토:0,금:0,수:0};
-  [[s.yg,s.yj],[s.mg,s.mj],[s.dg,s.dj]].concat(s.sg>=0?[[s.sg,s.sj]]:[]).forEach(([g,j])=>{o[GAN_OH[g]]++;o[JI_OH[j]]++;});
-  return o;
-}
-function calcDaeun(s,by,gender){
-  const fwd=(s.yg%2===1&&gender==='여성')||(s.yg%2===0&&gender==='남성');
-  return Array.from({length:6},(_,i)=>({gan:GAN[(s.mg+(fwd?1+i:-(1+i))+100)%10],ji:JI[(fwd?(s.mj+1+i):(s.mj-1-i+120))%12],age:3+i*10}));
-}
-function calcSeun(y){let b=(y-4)%60;if(b<0)b+=60;return{gan:GAN[b%10],ji:JI[b%12]}}
-function calcIlchin(y,m,d){const b=(toJD(y,m,d)+49)%60;return{gan:GAN[b%10],ji:JI[b%12],animal:ANI[b%12],good:['갑','을','병','정','무'].includes(GAN[b%10])}}
-
-let curMenu=null,answers={},loadTmr=null,lastSaju=null,tarotDeck=[],drawnCards=[],tarotAns={},lastCards=[];
+let curMenu=null,answers={},loadTmr=null;
 
 function init(){
-  // 별
   const sc=document.getElementById('stars');
   for(let i=0;i<50;i++){const s=document.createElement('div');s.className='star';const z=Math.random()*1.5+.4;s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;--dur:${(Math.random()*3+2).toFixed(1)}s;--del:${(Math.random()*5).toFixed(1)}s`;sc.appendChild(s);}
-  // 일진
-  const t=new Date(),il=calcIlchin(t.getFullYear(),t.getMonth()+1,t.getDate()),seun=calcSeun(t.getFullYear());
-  document.getElementById('ilchinBox').innerHTML=`<div style="font-size:22px;flex-shrink:0">🕯️</div><div class="ilchin-text"><div style="font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:2px">오늘의 일진</div><strong style="color:var(--gold2);font-size:15px">${il.gan}${il.ji}일 · ${il.animal}의 날</strong><br><span style="font-size:12px;color:var(--t3)">${il.good?'🕯️ 좋은 기운의 날':'⚠️ 신중함이 필요한 날'} · ${seun.gan}${seun.ji}년</span></div>`;
-  // 메뉴
+  const t=new Date();
+  document.getElementById('ilchinBox').innerHTML=`<div style="font-size:22px;flex-shrink:0">🕯️</div><div class="ilchin-text"><div style="font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:2px">오늘의 일진</div><strong style="color:var(--gold2);font-size:15px">길일입니다</strong><br><span style="font-size:12px;color:var(--t3)">🕯️ 좋은 기운의 날</span></div>`;
   const el=document.getElementById('menuList');
   MENUS.forEach((m,i)=>{const d=document.createElement('div');d.className='menu-card'+(m.feat?' feat':'');d.style.animationDelay=(i*.07)+'s';d.innerHTML=`<div class="menu-icon">${m.icon}</div><div style="flex:1"><div class="menu-label">${m.label}</div><div class="menu-desc">${m.desc}</div></div>${m.feat?'<div class="menu-badge">추천</div>':''}`;d.onclick=()=>openMenu(m);el.appendChild(d);});
 }
 
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo(0,0);}
 
-function openMenu(m){curMenu=m;answers={};lastSaju=null;lastCards=[];tarotDeck=[];drawnCards=[];
+function openMenu(m){curMenu=m;answers={};
   if(m.id==='today')showToday();
-  else if(m.id==='taro')openTarot();
   else openForm(m);
 }
 
 function showToday(){
-  const msgs=['🕯️ 오늘은 당신을 위한 날입니다.\n일어나는 모든 일을 긍정으로 받아들이세요.','🕯️ 작은 행동이 큰 변화를 만듭니다.\n오늘 한 걸음을 내디디세요.','🕯️ 누군가는 당신의 따뜻함을 기다리고 있습니다.\n웃어주세요.','🕯️ 운명은 준비된 자에게 옵니다.\n오늘도 최선을 다하세요.','🕯️ 지나간 것에 미련하지 마세요.\n오늘이 당신의 새 시작입니다.','🕯️ 당신이 생각하는 것보다\n당신은 훨씬 강합니다.','🕯️ 하늘은 항상 당신 편입니다.\n두려움 없이 나아가세요.','🕯️ 오늘의 만남은 모두 의미가 있습니다.\n소중히 여기세요.','🕯️ 지금 이 순간이 가장 소중합니다.\n현재에 충실하세요.','🕯️ 당신의 진심은 반드시 통합니다.\n포기하지 마세요.'];
+  const msgs=['🕯️ 오늘은 당신을 위한 날입니다.\n일어나는 모든 일을 긍정으로 받아들이세요.','🕯️ 작은 행동이 큰 변화를 만듭니다.\n오늘 한 걸음을 내디디세요.','🕯️ 누군가는 당신의 따뜻함을 기다리고 있습니다.\n웃어주세요.','🕯️ 당신이 생각하는 것보다\n당신은 훨씬 강합니다.','🕯️ 하늘은 항상 당신 편입니다.\n두려움 없이 나아가세요.'];
   document.getElementById('resIcon').textContent='☀️';
   document.getElementById('resTitle').textContent='오늘의운세';
   document.getElementById('resText').textContent=msgs[new Date().getDate()%msgs.length];
-  document.getElementById('resSaju').innerHTML='';
-  document.getElementById('resTarot').innerHTML='';
   show('result');
 }
 
@@ -381,7 +246,6 @@ function getDateVal(id){
 
 function openForm(m){
   document.getElementById('formTitle').textContent=m.label;
-  document.getElementById('sajuPreview').style.display='none';
   const qs=QS[m.id]||[],el=document.getElementById('formFields');
   el.innerHTML='';
   qs.forEach((q,i)=>{
@@ -390,81 +254,17 @@ function openForm(m){
     wrap.style.animationDelay=(i*.06)+'s';
     const req=q.t!=='txt';
     let html=`<div class="q-label">${q.lb}${req?' <span class="req">필수</span>':''}</div>`;
-    if(q.desc) html+=`<div class="q-desc">${q.desc}</div>`;
-    if(q.t==='date'){
-      html+=buildDateField(q.id);
-      wrap.innerHTML=html; el.appendChild(wrap); return;
-    }
+    if(q.t==='date'){html+=buildDateField(q.id);wrap.innerHTML=html;el.appendChild(wrap);return;}
     wrap.innerHTML=html;
     if(q.t==='sel'){
       const inp=document.createElement('select');
       inp.innerHTML='<option value="">선택해 주십시오</option>'+q.opts.map(o=>`<option value="${o}">${o}</option>`).join('');
       inp.onchange=e=>answers[q.id]=e.target.value;
       wrap.appendChild(inp);
-    } else {
-      const inp=document.createElement('input');
-      inp.type='text'; inp.placeholder=q.ph||'';
-      inp.oninput=e=>answers[q.id]=e.target.value;
-      wrap.appendChild(inp);
     }
     el.appendChild(wrap);
   });
   show('form');
-}
-
-function openTarot(){
-  tarotDeck=[...Array(22).keys()].sort(()=>Math.random()-.5);
-  drawnCards=[]; tarotAns={};
-  const qs=QS.taro,el=document.getElementById('tarotFields');
-  el.innerHTML='';
-  qs.forEach((q,i)=>{
-    const wrap=document.createElement('div');
-    wrap.className='q-item'; wrap.style.cssText=`animation-delay:${i*.06}s;margin-bottom:14px`;
-    const req=q.t!=='txt';
-    let html=`<div class="q-label">${q.lb}${req?' <span class="req">필수</span>':''}</div>`;
-    if(q.t==='date'){html+=buildDateField(q.id);wrap.innerHTML=html;el.appendChild(wrap);return;}
-    wrap.innerHTML=html;
-    if(q.t==='sel'){
-      const inp=document.createElement('select');
-      inp.innerHTML='<option value="">선택해 주십시오</option>'+q.opts.map(o=>`<option value="${o}">${o}</option>`).join('');
-      inp.onchange=e=>tarotAns[q.id]=e.target.value;
-      wrap.appendChild(inp);
-    } else {
-      const inp=document.createElement('input');
-      inp.type='text'; inp.placeholder=q.ph||'';
-      inp.oninput=e=>tarotAns[q.id]=e.target.value;
-      wrap.appendChild(inp);
-    }
-    el.appendChild(wrap);
-  });
-  const grid=document.getElementById('tarotGrid');
-  grid.innerHTML='';
-  for(let i=0;i<9;i++){const c=document.createElement('div');c.className='t-card';c.dataset.i=i;c.innerHTML=`<div class="t-inner"><div style="font-size:22px;opacity:.25">✦</div></div>`;c.onclick=()=>pickCard(i,c);grid.appendChild(c);}
-  document.getElementById('tarotBtn').style.display='none';
-  document.getElementById('tarotHint').innerHTML='🕯️ 마음을 고요히 하시고<br>이끌리는 카드를 순서대로 3장 고르세요<br><small style="opacity:.6">과거 · 현재 · 미래</small>';
-  show('tarotScreen');
-}
-
-function pickCard(i,el){
-  if(el.classList.contains('sel')||drawnCards.length>=3) return;
-  drawnCards.push(tarotDeck[i]);
-  const pos=drawnCards.length,lbs=['과거','현재','미래'],card=TAROT[tarotDeck[i]];
-  el.classList.add('sel');
-  el.innerHTML=`<div class="t-pos">${lbs[pos-1]}</div><div class="t-inner"><div class="t-emoji">${card.e}</div><div class="t-name">${card.n}</div><div class="t-meaning">${card.k}</div></div>`;
-  if(drawnCards.length===3){document.getElementById('tarotHint').innerHTML='🕯️ 세 장이 뽑혔습니다<br>아래 버튼을 눌러 신탁을 받으십시오';document.getElementById('tarotBtn').style.display='block';}
-  else document.getElementById('tarotHint').innerHTML=`${drawnCards.length}장 선택됨 · ${3-drawnCards.length}장 더 고르십시오`;
-}
-
-async function submitTarot(){
-  for(const q of QS.taro){
-    if(q.t==='date'){const v=getDateVal(q.id);if(!v){alert(q.lb+' 을 입력해 주십시오.');return;}tarotAns[q.id]=v;}
-    else if(q.t!=='txt'&&!tarotAns[q.id]){alert(q.lb+' 을 선택해 주십시오.');return;}
-  }
-  if(drawnCards.length<3){alert('카드 3장을 모두 고르십시오.');return;}
-  lastCards=drawnCards.map(i=>TAROT[i]);
-  const lbs=['과거','현재','미래'],cardTxt=drawnCards.map((ci,p)=>`${lbs[p]}: ${TAROT[ci].n} (${TAROT[ci].k})`).join('\n');
-  const msg=`[타로 풀이]\n생년월일: ${tarotAns.birth}\n성별: ${tarotAns.gender||''}\n궁금한 것: ${tarotAns.concern||''}\n${tarotAns.extra||''}\n\n[뽑힌 카드]\n${cardTxt}\n\n위 카드로 자세하게 풀이해 주십시오.`;
-  await callAI(msg,'🃏','타로점');
 }
 
 async function submitForm(){
@@ -473,48 +273,24 @@ async function submitForm(){
     if(q.t==='date'){const v=getDateVal(q.id);if(!v){alert(q.lb+' 을 입력해 주십시오.');return;}answers[q.id]=v;}
     else if(q.t!=='txt'&&!answers[q.id]){alert(q.lb+' 을 선택해 주십시오.');return;}
   }
-  let sajuInfo='';
-  if(['saju','total'].includes(curMenu.id)&&answers.birth){
-    try{
-      const[y,mo,d]=answers.birth.split('-').map(Number);
-      const h=BTIME_H[answers.btime]??-1;
-      const s=calcSaju(y,mo,d,h),daeun=calcDaeun(s,y,answers.gender||'여성');
-      const oh=calcOH(s),seun=calcSeun(new Date().getFullYear());
-      const age=new Date().getFullYear()-y;
-      const nowDaeun=daeun.find(x=>x.age<=age&&x.age+10>age)||daeun[0];
-      lastSaju={...s,y,oh,daeun,seun,nowDaeun};
-      sajuInfo=`\n\n[사주 명식]\n년주: ${GAN[s.yg]}(${GAN_OH[s.yg]}) ${JI[s.yj]}(${JI_OH[s.yj]}) ${ANI[s.yj]}띠\n월주: ${GAN[s.mg]}(${GAN_OH[s.mg]}) ${JI[s.mj]}(${JI_OH[s.mj]})\n일주: ${GAN[s.dg]}(${GAN_OH[s.dg]}) ${JI[s.dj]}(${JI_OH[s.dj]})\n${s.sg>=0?'시주: '+GAN[s.sg]+'('+GAN_OH[s.sg]+') '+JI[s.sj]+'('+JI_OH[s.sj]+')':''}\n[오행] ${Object.entries(oh).map(([k,v])=>k+' '+v+'개').join(' ')}\n[대운] ${nowDaeun.gan}${nowDaeun.ji}운\n[세운] ${seun.gan}${seun.ji}년`;
-    }catch(e){}
-  }
-  if(curMenu.id==='gunghap'&&answers.birth1&&answers.birth2){
-    try{
-      const[y1,m1,d1]=answers.birth1.split('-').map(Number);
-      const[y2,m2,d2]=answers.birth2.split('-').map(Number);
-      const s1=calcSaju(y1,m1,d1,-1),s2=calcSaju(y2,m2,d2,-1);
-      sajuInfo=`\n\n[본인 사주] 일간: ${GAN[s1.dg]}(${GAN_OH[s1.dg]}) 오행: ${Object.entries(calcOH(s1)).map(([k,v])=>k+v+'개').join(' ')}\n[상대 사주] 일간: ${GAN[s2.dg]}(${GAN_OH[s2.dg]}) 오행: ${Object.entries(calcOH(s2)).map(([k,v])=>k+v+'개').join(' ')}`;
-    }catch(e){}
-  }
   const lines=qs.filter(q=>q.t!=='txt').map(q=>`${q.lb}: ${answers[q.id]||'미입력'}`).join('\n');
-  const extra=answers.extra?'\n'+answers.extra:'';
-  const msg=`[${curMenu.label} 풀이]\n${lines}${extra}${sajuInfo}\n\n자세하고 공감가는 풀이를 해주십시오.`;
+  const msg=`[${curMenu.label} 풀이]\n${lines}\n\n자세하고 공감가는 풀이를 한국어로 해주십시오.`;
   await callAI(msg,curMenu.icon,curMenu.label);
 }
 
 async function callAI(msg,icon,title){
-  show('loading'); startLoad();
+  show('loading');
+  startLoad();
   try{
-    const res=await fetch('/.netlify/functions/ai',{
+    const res=await fetch('https://api.together.xyz/inference',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message:msg,system:SYSTEM})
+      headers:{'Content-Type':'application/json','Authorization':'Bearer 847bfb8e8a05c7c8dac0ad37e8f7adc1e9c3e5b1a54e2f8d6c9a7b4e1f3d5c8a'},
+      body:JSON.stringify({model:'meta-llama/Llama-3-70b-chat-hf',prompt:`${SYSTEM}\n\n사용자: ${msg}\n\n답변:`,max_tokens:1000,temperature:0.8})
     });
-    if(!res.ok) throw new Error('server error '+res.status);
     const data=await res.json();
-    if(!data.result) throw new Error('empty');
-    showResult(data.result,icon,title);
-  }catch(e){
-    showResult('풀이 결과를 가져오지 못했습니다.\n잠시 후 다시 시도해 주십시오.',icon,title);
-  }
+    const text=(data.output?.result?.[0]?.generated_text||'').split('답변:')[1]?.trim()||'결과를 가져오지 못했습니다.';
+    showResult(text,icon,title);
+  }catch(e){showResult('풀이 결과를 가져오지 못했습니다.\n다시 시도해 주십시오.',icon,title);}
   stopLoad();
 }
 
@@ -522,33 +298,11 @@ function showResult(text,icon,title){
   document.getElementById('resIcon').textContent=icon;
   document.getElementById('resTitle').textContent=title+' 풀이';
   document.getElementById('resText').textContent=text;
-  // 사주 명식
-  const sb=document.getElementById('resSaju');
-  if(lastSaju&&['saju','total'].includes(curMenu?.id)){
-    const s=lastSaju;
-    sb.innerHTML=`<div class="res-saju"><div class="res-saju-title">✦ 사주 명식 ✦</div>년주: ${GAN[s.yg]}(${GAN_OH[s.yg]}) ${JI[s.yj]}(${JI_OH[s.yj]}) ${ANI[s.yj]}띠<br>월주: ${GAN[s.mg]}(${GAN_OH[s.mg]}) ${JI[s.mj]}(${JI_OH[s.mj]})<br>일주: ${GAN[s.dg]}(${GAN_OH[s.dg]}) ${JI[s.dj]}(${JI_OH[s.dj]})<br>${s.sg>=0?'시주: '+GAN[s.sg]+'('+GAN_OH[s.sg]+') '+JI[s.sj]+'('+JI_OH[s.sj]+')':''}<br><br>${Object.entries(s.oh).map(([k,v])=>`<span style="color:${OH_C[k]};font-weight:700">${k}${v}개</span>`).join(' ')}</div>`;
-  } else sb.innerHTML='';
-  // 타로 카드
-  const tb=document.getElementById('resTarot');
-  if(lastCards.length===3){
-    const lbs=['과거','현재','미래'];
-    tb.innerHTML=`<div class="res-tarot">${lastCards.map((c,i)=>`<div class="res-t-mini"><div class="res-t-mini-e">${c.e}</div><div class="res-t-mini-p">${lbs[i]}</div><div class="res-t-mini-n">${c.n}</div></div>`).join('')}</div>`;
-  } else tb.innerHTML='';
   show('result');
 }
 
-function retry(){
-  lastSaju=null; lastCards=[]; answers={};
-  if(curMenu?.id==='today') showToday();
-  else if(curMenu?.id==='taro') openTarot();
-  else openForm(curMenu);
-}
-
-function startLoad(){
-  const msgs=['기운을 읽는 중...','만세력을 펼치는 중...','오행을 분석하는 중...','대운의 흐름을 읽는 중...','운명의 실을 엮는 중...'];
-  let i=0; const el=document.getElementById('loadTxt');
-  loadTmr=setInterval(()=>{i=(i+1)%msgs.length; el.textContent=msgs[i];},1300);
-}
+function retry(){answers={};if(curMenu?.id==='today')showToday();else openForm(curMenu);}
+function startLoad(){let i=0,msgs=['기운을 읽는 중...','만세력을 펼치는 중...','운명의 실을 엮는 중...'];const el=document.getElementById('loadTxt');loadTmr=setInterval(()=>{i=(i+1)%msgs.length;el.textContent=msgs[i];},1300);}
 function stopLoad(){clearInterval(loadTmr);}
 
 init();
