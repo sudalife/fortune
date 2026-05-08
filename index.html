@@ -35,7 +35,6 @@ html,body{height:100%;background:var(--bg);font-family:'Noto Serif KR',serif;col
 .ilchin-text{font-size:13px;color:var(--t2);line-height:1.7}
 .creator{text-align:center;margin-top:16px}
 .creator-name{font-size:14px;color:var(--gold);font-weight:700;letter-spacing:3px}
-.creator-sub{font-size:11px;color:var(--t3);margin-top:3px}
 .menu-title{font-size:22px;font-weight:700;color:var(--gold2);margin-bottom:6px}
 .menu-sub{font-size:13px;color:var(--t3);margin-bottom:22px;line-height:1.8}
 .menu-list{display:flex;flex-direction:column;gap:11px}
@@ -98,7 +97,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   <div class="ilchin-box" id="ilchinBox"></div>
   <div class="creator">
     <div class="creator-name">✦ 오 영 석 ✦</div>
-    <div class="creator-sub">신통한 운명풀이 제작</div>
   </div>
 </div>
 
@@ -207,18 +205,14 @@ let curMenu=null,answers={},loadTmr=null;
 function init(){
   const sc=document.getElementById('stars');
   for(let i=0;i<50;i++){const s=document.createElement('div');s.className='star';const z=Math.random()*1.5+.4;s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;--dur:${(Math.random()*3+2).toFixed(1)}s;--del:${(Math.random()*5).toFixed(1)}s`;sc.appendChild(s);}
-  const t=new Date();
-  document.getElementById('ilchinBox').innerHTML=`<div style="font-size:22px;flex-shrink:0">🕯️</div><div class="ilchin-text"><div style="font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:2px">오늘의 일진</div><strong style="color:var(--gold2);font-size:15px">길일입니다</strong><br><span style="font-size:12px;color:var(--t3)">🕯️ 좋은 기운의 날</span></div>`;
+  document.getElementById('ilchinBox').innerHTML=`<div style="font-size:22px">🕯️</div><div class="ilchin-text" style="flex:1"><div style="font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:2px">오늘의 일진</div><strong style="color:var(--gold2);font-size:15px">길일입니다</strong><br><span style="font-size:12px;color:var(--t3)">🕯️ 좋은 기운의 날</span></div>`;
   const el=document.getElementById('menuList');
   MENUS.forEach((m,i)=>{const d=document.createElement('div');d.className='menu-card'+(m.feat?' feat':'');d.style.animationDelay=(i*.07)+'s';d.innerHTML=`<div class="menu-icon">${m.icon}</div><div style="flex:1"><div class="menu-label">${m.label}</div><div class="menu-desc">${m.desc}</div></div>${m.feat?'<div class="menu-badge">추천</div>':''}`;d.onclick=()=>openMenu(m);el.appendChild(d);});
 }
 
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo(0,0);}
 
-function openMenu(m){curMenu=m;answers={};
-  if(m.id==='today')showToday();
-  else openForm(m);
-}
+function openMenu(m){curMenu=m;answers={};if(m.id==='today')showToday();else openForm(m);}
 
 function showToday(){
   const msgs=['🕯️ 오늘은 당신을 위한 날입니다.\n일어나는 모든 일을 긍정으로 받아들이세요.','🕯️ 작은 행동이 큰 변화를 만듭니다.\n오늘 한 걸음을 내디디세요.','🕯️ 누군가는 당신의 따뜻함을 기다리고 있습니다.\n웃어주세요.','🕯️ 당신이 생각하는 것보다\n당신은 훨씬 강합니다.','🕯️ 하늘은 항상 당신 편입니다.\n두려움 없이 나아가세요.'];
@@ -228,78 +222,17 @@ function showToday(){
   show('result');
 }
 
-function buildDateField(id){
-  return`<div class="date-wrap">
-    <input type="number" id="${id}_y" placeholder="연도" min="1900" max="${new Date().getFullYear()}" inputmode="numeric">
-    <input type="number" id="${id}_m" placeholder="월" min="1" max="12" inputmode="numeric" style="max-width:70px">
-    <input type="number" id="${id}_d" placeholder="일" min="1" max="31" inputmode="numeric" style="max-width:70px">
-  </div>`;
-}
+function buildDateField(id){return`<div class="date-wrap"><input type="number" id="${id}_y" placeholder="연도" min="1900" max="${new Date().getFullYear()}" inputmode="numeric"><input type="number" id="${id}_m" placeholder="월" min="1" max="12" inputmode="numeric" style="max-width:70px"><input type="number" id="${id}_d" placeholder="일" min="1" max="31" inputmode="numeric" style="max-width:70px"></div>`;}
 
-function getDateVal(id){
-  const y=document.getElementById(`${id}_y`)?.value;
-  const m=document.getElementById(`${id}_m`)?.value;
-  const d=document.getElementById(`${id}_d`)?.value;
-  if(!y||!m||!d) return null;
-  return y.padStart(4,'0')+'-'+m.padStart(2,'0')+'-'+d.padStart(2,'0');
-}
+function getDateVal(id){const y=document.getElementById(`${id}_y`)?.value;const m=document.getElementById(`${id}_m`)?.value;const d=document.getElementById(`${id}_d`)?.value;if(!y||!m||!d)return null;return y.padStart(4,'0')+'-'+m.padStart(2,'0')+'-'+d.padStart(2,'0');}
 
-function openForm(m){
-  document.getElementById('formTitle').textContent=m.label;
-  const qs=QS[m.id]||[],el=document.getElementById('formFields');
-  el.innerHTML='';
-  qs.forEach((q,i)=>{
-    const wrap=document.createElement('div');
-    wrap.className='q-item';
-    wrap.style.animationDelay=(i*.06)+'s';
-    const req=q.t!=='txt';
-    let html=`<div class="q-label">${q.lb}${req?' <span class="req">필수</span>':''}</div>`;
-    if(q.t==='date'){html+=buildDateField(q.id);wrap.innerHTML=html;el.appendChild(wrap);return;}
-    wrap.innerHTML=html;
-    if(q.t==='sel'){
-      const inp=document.createElement('select');
-      inp.innerHTML='<option value="">선택해 주십시오</option>'+q.opts.map(o=>`<option value="${o}">${o}</option>`).join('');
-      inp.onchange=e=>answers[q.id]=e.target.value;
-      wrap.appendChild(inp);
-    }
-    el.appendChild(wrap);
-  });
-  show('form');
-}
+function openForm(m){document.getElementById('formTitle').textContent=m.label;const qs=QS[m.id]||[],el=document.getElementById('formFields');el.innerHTML='';qs.forEach((q,i)=>{const wrap=document.createElement('div');wrap.className='q-item';wrap.style.animationDelay=(i*.06)+'s';const req=q.t!=='txt';let html=`<div class="q-label">${q.lb}${req?' <span class="req">필수</span>':''}</div>`;if(q.t==='date'){html+=buildDateField(q.id);wrap.innerHTML=html;el.appendChild(wrap);return;}wrap.innerHTML=html;if(q.t==='sel'){const inp=document.createElement('select');inp.innerHTML='<option value="">선택해 주십시오</option>'+q.opts.map(o=>`<option value="${o}">${o}</option>`).join('');inp.onchange=e=>answers[q.id]=e.target.value;wrap.appendChild(inp);}el.appendChild(wrap);});show('form');}
 
-async function submitForm(){
-  const qs=QS[curMenu.id]||[];
-  for(const q of qs){
-    if(q.t==='date'){const v=getDateVal(q.id);if(!v){alert(q.lb+' 을 입력해 주십시오.');return;}answers[q.id]=v;}
-    else if(q.t!=='txt'&&!answers[q.id]){alert(q.lb+' 을 선택해 주십시오.');return;}
-  }
-  const lines=qs.filter(q=>q.t!=='txt').map(q=>`${q.lb}: ${answers[q.id]||'미입력'}`).join('\n');
-  const msg=`[${curMenu.label} 풀이]\n${lines}\n\n자세하고 공감가는 풀이를 한국어로 해주십시오.`;
-  await callAI(msg,curMenu.icon,curMenu.label);
-}
+async function submitForm(){const qs=QS[curMenu.id]||[];for(const q of qs){if(q.t==='date'){const v=getDateVal(q.id);if(!v){alert(q.lb+' 을 입력해 주십시오.');return;}answers[q.id]=v;}else if(q.t!=='txt'&&!answers[q.id]){alert(q.lb+' 을 선택해 주십시오.');return;}}const lines=qs.filter(q=>q.t!=='txt').map(q=>`${q.lb}: ${answers[q.id]||'미입력'}`).join('\n');const msg=`[${curMenu.label} 풀이]\n${lines}\n\n자세하고 공감가는 풀이를 한국어로 해주십시오.`;await callAI(msg,curMenu.icon,curMenu.label);}
 
-async function callAI(msg,icon,title){
-  show('loading');
-  startLoad();
-  try{
-    const res=await fetch('https://api.together.xyz/inference',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer 847bfb8e8a05c7c8dac0ad37e8f7adc1e9c3e5b1a54e2f8d6c9a7b4e1f3d5c8a'},
-      body:JSON.stringify({model:'meta-llama/Llama-3-70b-chat-hf',prompt:`${SYSTEM}\n\n사용자: ${msg}\n\n답변:`,max_tokens:1000,temperature:0.8})
-    });
-    const data=await res.json();
-    const text=(data.output?.result?.[0]?.generated_text||'').split('답변:')[1]?.trim()||'결과를 가져오지 못했습니다.';
-    showResult(text,icon,title);
-  }catch(e){showResult('풀이 결과를 가져오지 못했습니다.\n다시 시도해 주십시오.',icon,title);}
-  stopLoad();
-}
+async function callAI(msg,icon,title){show('loading');startLoad();try{const res=await fetch('https://api-test.groq.com/api/fortune',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,system:SYSTEM})});const data=await res.json();const text=data.result||'결과를 가져오지 못했습니다.';showResult(text,icon,title);}catch(e){showResult('풀이 결과를 가져오지 못했습니다.\n다시 시도해 주십시오.',icon,title);}stopLoad();}
 
-function showResult(text,icon,title){
-  document.getElementById('resIcon').textContent=icon;
-  document.getElementById('resTitle').textContent=title+' 풀이';
-  document.getElementById('resText').textContent=text;
-  show('result');
-}
+function showResult(text,icon,title){document.getElementById('resIcon').textContent=icon;document.getElementById('resTitle').textContent=title+' 풀이';document.getElementById('resText').textContent=text;show('result');}
 
 function retry(){answers={};if(curMenu?.id==='today')showToday();else openForm(curMenu);}
 function startLoad(){let i=0,msgs=['기운을 읽는 중...','만세력을 펼치는 중...','운명의 실을 엮는 중...'];const el=document.getElementById('loadTxt');loadTmr=setInterval(()=>{i=(i+1)%msgs.length;el.textContent=msgs[i];},1300);}
